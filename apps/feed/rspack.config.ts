@@ -1,13 +1,14 @@
-const { NxAppRspackPlugin } = require('@nx/rspack/app-plugin');
-const { NxReactRspackPlugin } = require('@nx/rspack/react-plugin');
-const { join } = require('path');
+import { NxAppRspackPlugin } from '@nx/rspack/app-plugin';
+import { NxReactRspackPlugin } from '@nx/rspack/react-plugin';
+import { join } from 'path';
+import type { Configuration } from '@rspack/core';
 
-module.exports = {
+const config: Configuration = {
   output: {
     path: join(__dirname, 'dist'),
   },
   devServer: {
-    port: 4200,
+    port: 4201, // Changed from 4200 to avoid port conflicts
     historyApiFallback: {
       index: '/index.html',
       disableDotRule: true,
@@ -20,7 +21,7 @@ module.exports = {
       main: './src/main.tsx',
       index: './src/index.html',
       baseHref: '/',
-      assets: ["./src/favicon.ico","./src/assets"],
+      assets: ["./src/favicon.ico", "./src/assets"],
       styles: ["./src/styles.css"],
       outputHashing: process.env['NODE_ENV'] === 'production' ? 'all' : 'none',
       optimization: process.env['NODE_ENV'] === 'production',
@@ -32,3 +33,5 @@ module.exports = {
     }),
   ],
 };
+
+export default config;

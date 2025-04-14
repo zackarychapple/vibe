@@ -1,10 +1,10 @@
 {
-  "name": "@vibe/feed-e2e",
+  "name": "feed-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "@vibe/feed"
+      "feed"
     ]
   }
 }

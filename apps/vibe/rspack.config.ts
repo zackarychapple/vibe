@@ -1,9 +1,10 @@
-const { NxAppRspackPlugin } = require('@nx/rspack/app-plugin');
-const { NxReactRspackPlugin } = require('@nx/rspack/react-plugin');
-const { join } = require('path');
-const {withZephyr} = require('zephyr-rspack-plugin');
+import { NxAppRspackPlugin } from '@nx/rspack/app-plugin';
+import { NxReactRspackPlugin } from '@nx/rspack/react-plugin';
+import { join } from 'path';
+import type { Configuration } from '@rspack/core';
+import { withZephyr } from "zephyr-rspack-plugin";
 
-module.exports = withZephyr()({
+const config: Configuration = {
   output: {
     path: join(__dirname, 'dist'),
   },
@@ -21,7 +22,7 @@ module.exports = withZephyr()({
       main: './src/main.tsx',
       index: './src/index.html',
       baseHref: '/',
-      assets: ["./src/favicon.ico","./src/assets"],
+      assets: ["./src/favicon.ico", "./src/assets"],
       styles: ["./src/styles.css"],
       outputHashing: process.env['NODE_ENV'] === 'production' ? 'all' : 'none',
       optimization: process.env['NODE_ENV'] === 'production',
@@ -31,5 +32,8 @@ module.exports = withZephyr()({
       // See: https://react-svgr.com/
       // svgr: false
     }),
+    withZephyr()
   ],
-});
+};
+
+export default config;

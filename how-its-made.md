@@ -65,3 +65,134 @@ NX   Welcome to the Nx community! 👋
 10. Realized that there was no "cross-cutting" scope, so manually added common to commitlint scopes.
 11. Added Zephyr `pnpm add zephyr-rspack-plugin@latest`
 12. Manually added zephyr to vibe rspack.config.js `const {withZephyr} = require('zephyr-rspack-plugin');` and `module.exports = withZephyr()({ /* existing config */ })` per [docs](https://docs.zephyr-cloud.io/recipes/react-rspack-nx)
+13. Refactoring rspack configs with claude. `i do not like that the rspack configs are js, lets refactor all of them to ts `
+14. While refactoring claude tried to do a build to verify the refactor, this was causing zephyr to authenticate and claude didn't open the window. Killed claude.
+15. Saw Rspack versions were out of date, bumped to `^1.3.4`
+16. ran `pnpm approve-builds` to enable swc and nx
+17. Tried to do a build of vibe with `nx build vibe` got errors
+```bash 
+> rspack build --node-env=production
+
+Error: Cannot find module 'ts-node/register' from '/Users/zackarychapple/code/vibe/apps/vibe'
+Cannot find module 'sucrase/register/ts' from '/Users/zackarychapple/code/vibe/apps/vibe'
+Cannot find module '@babel/register' from '/Users/zackarychapple/code/vibe/apps/vibe'
+Cannot find module 'esbuild-register/dist/node' from '/Users/zackarychapple/code/vibe/apps/vibe'
+Cannot find module '@swc/register' from '/Users/zackarychapple/code/vibe/apps/vibe'
+    at registerLoader (/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+cli@1.3.4_@rspack+core@1.3.4_@swc+helpers@0.5.17__@types+express@4.17.21_webpac_b9a40038ec6c65e81b58836c42cc2274/node_modules/@rspack/cli/dist/index.js:551:23)
+    at async loadRspackConfig (/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+cli@1.3.4_@rspack+core@1.3.4_@swc+helpers@0.5.17__@types+express@4.17.21_webpac_b9a40038ec6c65e81b58836c42cc2274/node_modules/@rspack/cli/dist/index.js:608:87)
+    at async RspackCLI.loadConfig (/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+cli@1.3.4_@rspack+core@1.3.4_@swc+helpers@0.5.17__@types+express@4.17.21_webpac_b9a40038ec6c65e81b58836c42cc2274/node_modules/@rspack/cli/dist/index.js:735:32)
+    at async RspackCLI.createCompiler (/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+cli@1.3.4_@rspack+core@1.3.4_@swc+helpers@0.5.17__@types+express@4.17.21_webpac_b9a40038ec6c65e81b58836c42cc2274/node_modules/@rspack/cli/dist/index.js:628:26)
+    at async Object.handler (/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+cli@1.3.4_@rspack+core@1.3.4_@swc+helpers@0.5.17__@types+express@4.17.21_webpac_b9a40038ec6c65e81b58836c42cc2274/node_modules/@rspack/cli/dist/index.js:284:34)
+Warning: command "rspack build --node-env=production" exited with non-zero status code
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+ NX   Ran target build for project vibe (455ms)
+```
+18. Added ts-node ` pnpm add -D ts-node`
+19. Build ran succesfully. 
+```bash
+> rspack build --node-env=production
+
+●  ━━━━━━━━━━━━━━━━━━━━━━━━━ (100%) emitting after emit                                                                                                                                                                                   Entrypoint main 192 KiB = runtime.3ca0214ea26e6dd6.js 1.63 KiB main.a0767d3aa96b88db.css 8.13 KiB main.02b8c1c71263ed44.js 182 KiB
+chunk (runtime: runtime) runtime.3ca0214ea26e6dd6.js (runtime) 4.19 KiB [initial] [rendered]
+chunk (runtime: runtime) main.02b8c1c71263ed44.js, main.a0767d3aa96b88db.css (main) 13 KiB (css/mini-extract) 508 KiB (javascript) [entry] [rendered]
+Rspack compiled successfully (b304f6e1dbac1d40)
+
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+ NX   Successfully ran target build for project vibe (2s)
+
+View logs and investigate cache misses at https://nx.app/runs/tkL2mGM9e4
+```
+20. While claude was trying to fix the migration from js to ts it removed Zephyr (since it wasn't authenticating). Added it back to the typed version.
+21. Tried running `nx build vibe` it hung and got a message in terminal
+```bash
+⠇ Calculating the project graph on the Nx Daemon is taking longer than expected. Re-run with NX_DAEMON=false to see more details.^C%                                                                                                      
+zackarychapple@MacBook-Pro-2 vibe % NX_DAEMON=false nx build vibe 
+```
+22. Killed the terminal command and ran `NX_DAEMON=false nx build vibe`
+23. Was prompted to log into zephyr, logged in, got an error.
+```bash
+
+ ZEPHYR   Hi zackary_chapple!
+ ZEPHYR   -vibe-source.vibe.zackarychapple#2545
+ ZEPHYR   
+ ZEPHYR   Hi zackary_chapple!
+                              ZEPHYR   -vibe-source.vibe.zackarychapple#2546
+                                                                             ZEPHYR   
+                                                                                      rspack.config.ts:38:29 - error TS2345: Argument of type 'import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+core@1.3.4_@swc+helpers@0.5.17/node_modules/@rspack/core/dist/config/types").RspackOptions' is not assignable to parameter of type 'import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+core@1.2.8_@swc+helpers@0.5.17/node_modules/@rspack/core/dist/config/types").RspackOptions'.
+  Types of property 'experiments' are incompatible.
+    Type 'import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+core@1.3.4_@swc+helpers@0.5.17/node_modules/@rspack/core/dist/config/types").Experiments | undefined' is not assignable to type 'import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+core@1.2.8_@swc+helpers@0.5.17/node_modules/@rspack/core/dist/config/types").Experiments | undefined'.
+      Type 'import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+core@1.3.4_@swc+helpers@0.5.17/node_modules/@rspack/core/dist/config/types").Experiments' is not assignable to type 'import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+core@1.2.8_@swc+helpers@0.5.17/node_modules/@rspack/core/dist/config/types").Experiments'.
+        Types of property 'lazyCompilation' are incompatible.
+          Type 'boolean | import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+core@1.3.4_@swc+helpers@0.5.17/node_modules/@rspack/core/dist/config/types").LazyCompilationOptions | undefined' is not assignable to type 'boolean | import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+core@1.2.8_@swc+helpers@0.5.17/node_modules/@rspack/core/dist/config/types").LazyCompilationOptions | undefined'.
+            Type 'LazyCompilationOptions' is not assignable to type 'boolean | LazyCompilationOptions | undefined'.
+              Type 'import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+core@1.3.4_@swc+helpers@0.5.17/node_modules/@rspack/core/dist/config/types").LazyCompilationOptions' is not assignable to type 'import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+core@1.2.8_@swc+helpers@0.5.17/node_modules/@rspack/core/dist/config/types").LazyCompilationOptions'.
+                Types of property 'test' are incompatible.
+                  Type 'RegExp | ((module: import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+binding@1.3.4/node_modules/@rspack/binding/binding").Module) => boolean) | undefined' is not assignable to type 'RegExp | ((module: import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+core@1.2.8_@swc+helpers@0.5.17/node_modules/@rspack/core/dist/Module").Module) => boolean) | undefined'.
+                    Type '(module: Module) => boolean' is not assignable to type 'RegExp | ((module: Module) => boolean) | undefined'.
+                      Type '(module: import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+binding@1.3.4/node_modules/@rspack/binding/binding").Module) => boolean' is not assignable to type '(module: import("/Users/zackarychapple/code/vibe/node_modules/.pnpm/@rspack+core@1.2.8_@swc+helpers@0.5.17/node_modules/@rspack/core/dist/Module").Module) => boolean'.
+                        Types of parameters 'module' and 'module' are incompatible.
+                          Type 'Module' is missing the following properties from type 'Module': useSimpleSourceMap, _originalSource, _emitFile, [MODULE_IDENTIFIER_SYMBOL]
+
+38 export default withZephyr()(config);
+                               ~~~~~~
+
+Warning: command "rspack build --node-env=production" exited with non-zero status code
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+ NX   Ran target build for project vibe (1s)
+
+   ✖  1/1 failed
+   ✔  0/1 succeeded [0 read from cache]
+```
+24. Remembered that I can just have Zephyr as the last plugin in the plugin array and adjusted the config to be that. 
+25. Build was successful but the URL was incomplete. 
+```bash
+zackarychapple@MacBook-Pro-2 vibe % nx build vibe                
+
+> nx run vibe:build
+
+> rspack build --node-env=production
+
+●  ━━━━��━━━━━━━━━━━━━━━━━━━━ (78%) sealing chunk modules optimization                                                                                                                                                                    ●  ━━━━━━━━━━━━━━━━━━━━━━━━━ (100%) emitting after emit                                                                                                                                                                                   Entrypoint main 192 KiB = runtime.3ca0214ea26e6dd6.js 1.63 KiB main.a0767d3aa96b88db.css 8.13 KiB main.02b8c1c71263ed44.js 182 KiB
+chunk (runtime: runtime) runtime.3ca0214ea26e6dd6.js (runtime) 4.19 KiB [initial] [rendered]
+chunk (runtime: runtime) main.02b8c1c71263ed44.js, main.a0767d3aa96b88db.css (main) 13 KiB (css/mini-extract) 508 KiB (javascript) [entry] [rendered]
+Rspack compiled successfully (b304f6e1dbac1d40)
+ ZEPHYR   Hi zackary_chapple!
+ ZEPHYR   -vibe-vibe.vibe.zackarychapple#2550
+ ZEPHYR   
+
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+ NX   Successfully ran target build for project vibe (3s)
+
+View logs and investigate cache misses at https://nx.app/runs/0UzqfqRXCd
+```
+26. Realized that Zephyr does not like `@vibe/vibe` in the `package.json` file for the name attribute. Adjusted the names in the `package.json` files
+27. Built again, url looks off still
+```bash
+zackarychapple@MacBook-Pro-2 vibe % nx build vibe
+
+> nx run vibe:build
+
+> rspack build --node-env=production
+
+●  ━━━━━━━━━━━━━━━━━━━━━━━━━ (100%) emitting after emit                                                                                                                                                                                   Entrypoint main 192 KiB = runtime.b78a18277e35a2ef.js 1.62 KiB main.a0767d3aa96b88db.css 8.13 KiB main.dfe27d21060799a1.js 182 KiB
+chunk (runtime: runtime) runtime.b78a18277e35a2ef.js (runtime) 4.18 KiB [initial] [rendered]
+chunk (runtime: runtime) main.a0767d3aa96b88db.css, main.dfe27d21060799a1.js (main) 13 KiB (css/mini-extract) 508 KiB (javascript) [entry] [rendered]
+Rspack compiled successfully (58dc56d572510aea)
+ ZEPHYR   Hi zackary_chapple!
+ ZEPHYR   -vibe-vibe.vibe.zackarychapple#2551
+ ZEPHYR   
+
+—————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
+ NX   Successfully ran target build for project vibe (3s)
+```
+28. Clearing Zephyr config `rm -r ~/.zephyr/` then building vibe again with `nx build vibe`
+29. Output was still broken, had to run with `NX_DAEMON=false` again because auth hangs.
+30. Running with output `DEBUG=zephyr:* NX_DAEMON=false nx build vibe`, output was unchanged, realized I may be hitting nx cache.
+31. Running `DEBUG=zephyr:* NX_DAEMON=false nx build vibe --skip-nx-cache` got a full output, however couldn't see URL easily. Running without verbose output. 
+32. `NX_DAEMON=false nx build vibe --skip-nx-cache
+`

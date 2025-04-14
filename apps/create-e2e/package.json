@@ -1,10 +1,10 @@
 {
-  "name": "@vibe/create-e2e",
+  "name": "create-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "@vibe/create"
+      "create"
     ]
   }
 }
