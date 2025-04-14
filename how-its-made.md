@@ -226,3 +226,4 @@ I'm going to create a clone of X for a project. I want to use React and Shadcn. 
 48. Manually adding the postcss loader `pnpm add -D postcss-loader`. 
 49. Styles updated correctly and we got our first decent looking build https://zackary-chapple-2666-shell-vibe-zackarychapple-c9f68fb31-ze.zephyrcloud.app
 50. The data is currently hardcoded, asked Claude to make it dynamic "Lets extract all of the data for each of the components and use tanstack query to fetch the data from json objects that we have hardcoded for now. Please review the documentation for tanstack query v5 https://tanstack.com/query/latest/docs/framework/react/overview and extract the data for the components."
+51. Removed hardcoded nx-welcome file that is no longer needed. 
