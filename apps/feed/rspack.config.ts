@@ -1,37 +1,78 @@
-import { NxAppRspackPlugin } from '@nx/rspack/app-plugin';
-import { NxReactRspackPlugin } from '@nx/rspack/react-plugin';
-import { join } from 'path';
-import type { Configuration } from '@rspack/core';
+import { rspack } from "@rspack/core";
+import {withZephyr} from "zephyr-rspack-plugin";
 
-const config: Configuration = {
+const isDev = process.env.NODE_ENV === "development";
+
+const config = {
+  context: __dirname,
+  entry: {
+    main: "./src/main.tsx"
+  },
+  resolve: {
+    extensions: ["...", ".ts", ".tsx", ".jsx"]
+  },
+  module: {
+    rules: [
+      {
+        test: /\.svg$/,
+        type: "asset"
+      },
+      {
+        test: /\.(jsx?|tsx?)$/,
+        use: [
+          {
+            loader: "builtin:swc-loader",
+            options: {
+              jsc: {
+                parser: {
+                  syntax: "typescript",
+                  tsx: true
+                },
+                transform: {
+                  react: {
+                    runtime: "automatic",
+                    development: isDev,
+                    refresh: isDev
+                  }
+                }
+              },
+              env: {
+                targets: [
+                  "chrome >= 87",
+                  "edge >= 88",
+                  "firefox >= 78",
+                  "safari >= 14"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
   output: {
-    path: join(__dirname, 'dist'),
+    path: __dirname + "/dist"
   },
   devServer: {
-    port: 4201, // Changed from 4200 to avoid port conflicts
+    port: 4201,
     historyApiFallback: {
-      index: '/index.html',
+      index: "/index.html",
       disableDotRule: true,
-      htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'],
+      htmlAcceptHeaders: ["text/html", "application/xhtml+xml"],
     },
   },
   plugins: [
-    new NxAppRspackPlugin({
-      tsConfig: './tsconfig.app.json',
-      main: './src/main.tsx',
-      index: './src/index.html',
-      baseHref: '/',
-      assets: ["./src/favicon.ico", "./src/assets"],
-      styles: ["./src/styles.css"],
-      outputHashing: process.env['NODE_ENV'] === 'production' ? 'all' : 'none',
-      optimization: process.env['NODE_ENV'] === 'production',
+    new rspack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
     }),
-    new NxReactRspackPlugin({
-      // Uncomment this line if you don't want to use SVGR
-      // See: https://react-svgr.com/
-      // svgr: false
-    }),
-  ],
+    new rspack.ProgressPlugin({}),
+    new rspack.HtmlRspackPlugin({
+      template: "./src/index.html"
+    })
+  ].filter(Boolean),
+  experiments: {
+    css: true
+  }
 };
 
-export default config;
+export default withZephyr()(config);
