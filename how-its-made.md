@@ -194,5 +194,5 @@ Rspack compiled successfully (58dc56d572510aea)
 29. Output was still broken, had to run with `NX_DAEMON=false` again because auth hangs.
 30. Running with output `DEBUG=zephyr:* NX_DAEMON=false nx build vibe`, output was unchanged, realized I may be hitting nx cache.
 31. Running `DEBUG=zephyr:* NX_DAEMON=false nx build vibe --skip-nx-cache` got a full output, however couldn't see URL easily. Running without verbose output. 
-32. `NX_DAEMON=false nx build vibe --skip-nx-cache
-`
+32. `NX_DAEMON=false nx build vibe --skip-nx-cache`
+33. This was still broken due to some issues with compatibility of Zephyr and the Nx config wrapper for Rspack, and the newer versions of Rspack. Moved to manual Rspack config.

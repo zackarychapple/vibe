@@ -16,6 +16,7 @@
     ]
   },
   "nxCloudId": "67fd4658e94071427ff24735",
+  "useDaemonProcess": false,
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
