@@ -1,14 +1,11 @@
 import {
-  Route,
-  Router,
-  RootRoute,
-  RouterProvider,
   createRootRoute,
   createRouter,
   createRoute
 } from '@tanstack/react-router';
 import Root from '../routes/Root';
 import Index from '../routes/Index';
+import ComposeModal from '../components/ComposeModal';
 
 // Create a root route with the TwitterClone layout
 const rootRoute = createRootRoute({
@@ -149,6 +146,13 @@ const moreRoute = createRoute({
   )
 });
 
+// Compose route for the modal
+const composeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/compose/post',
+  component: ComposeModal
+});
+
 // Define the route tree
 const routeTree = rootRoute.addChildren([
   indexRoute,
@@ -164,12 +168,21 @@ const routeTree = rootRoute.addChildren([
   articlesRoute,
   verifiedOrgsRoute,
   moreRoute,
+  composeRoute,
 ]);
 
 // Create the router instance
 const router = createRouter({
   routeTree,
   defaultPreloadStaleTime: 0,
+  // Add route masks configuration to show the compose modal as an overlay
+  routeMasks: [
+    {
+      routeMask: 'compose/post',
+      toPath: '$currentRoute',
+      fromPath: '$currentRoute/compose/post'
+    }
+  ],
 });
 
 // Register the router for type safety

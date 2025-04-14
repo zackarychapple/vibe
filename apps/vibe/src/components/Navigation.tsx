@@ -14,7 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { useNavigationItems, useUser } from "../lib/query";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 
 // Map icon names to Lucide icon components
 const iconMap: Record<string, React.ElementType> = {
@@ -34,6 +34,11 @@ const iconMap: Record<string, React.ElementType> = {
 export default function Navigation() {
   const { data: navItems = [], isLoading: isNavLoading } = useNavigationItems();
   const { data: currentUser, isLoading: isUserLoading } = useUser("user-1"); // Assuming user-1 is the logged-in user
+  const navigate = useNavigate();
+
+  const handleComposeClick = () => {
+    navigate({ to: '/compose/post' });
+  };
 
   return (
     <div className="hidden md:flex flex-col w-64 p-4 border-r border-twitter-gray-dark">
@@ -67,7 +72,12 @@ export default function Navigation() {
         )}
       </nav>
 
-      <Button className="mt-6 w-full rounded-full bg-twitter-blue hover:bg-twitter-blue-dark">Post</Button>
+      <Button 
+        className="mt-6 w-full rounded-full bg-twitter-blue hover:bg-twitter-blue-dark"
+        onClick={handleComposeClick}
+      >
+        Post
+      </Button>
 
       <div className="mt-auto flex items-center gap-2 p-4">
         {isUserLoading ? (
