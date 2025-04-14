@@ -9,13 +9,20 @@ import ComposeModal from '../components/ComposeModal';
 
 // Create a root route with the TwitterClone layout
 const rootRoute = createRootRoute({
-  component: Root
+  component: Root,
+  // Redirect from root to home
+  // TODO: Fix this properly
+  beforeLoad: () => {
+    if (window.location.pathname === '/') {
+      window.location.pathname = '/home';
+    }
+  }
 });
 
 // Create individual routes that will be rendered inside the Feed component's Outlet
-const indexRoute = createRoute({
+const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/',
+  path: '/home',
   component: Index
 });
 
@@ -155,7 +162,7 @@ const composeRoute = createRoute({
 
 // Define the route tree
 const routeTree = rootRoute.addChildren([
-  indexRoute,
+  homeRoute,
   feedRoute,
   exploreRoute,
   notificationsRoute,
@@ -178,11 +185,10 @@ const router = createRouter({
   // Add route masks configuration to show the compose modal as an overlay
   routeMasks: [
     {
-      routeMask: 'compose/post',
-      toPath: '$currentRoute',
-      fromPath: '$currentRoute/compose/post'
+      matcher: '/compose/post',
+      parentMatcher: '/*'
     }
-  ],
+  ]
 });
 
 // Register the router for type safety

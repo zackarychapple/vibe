@@ -3,7 +3,7 @@ import { Home, MessageCircle, Search, User } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 const bottomNavItems = [
-  { id: "bottom-nav-1", label: "Home", icon: Home, path: "/" },
+  { id: "bottom-nav-1", label: "Home", icon: Home, path: "/home" },
   { id: "bottom-nav-2", label: "Explore", icon: Search, path: "/explore" },
   { id: "bottom-nav-3", label: "Messages", icon: MessageCircle, path: "/messages" },
   { id: "bottom-nav-4", label: "Profile", icon: User, path: "/profile" },

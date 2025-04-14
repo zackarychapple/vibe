@@ -2,8 +2,7 @@ import type { ReactNode } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { ArrowUpFromLine, BarChart2, Bookmark, MessageCircle, MoreHorizontal, Share, Star } from "lucide-react";
-import { User, Tweet as TweetType } from "../lib/utils";
-import { useTweet } from "../lib/query";
+import { User } from "../lib/utils";
 
 interface TweetProps {
   tweetId?: string;

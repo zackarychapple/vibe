@@ -5,6 +5,7 @@ export default function Root() {
   return (
     <>
       <TwitterClone />
+      {/*TODO: Use this outlet within the twitter clone*/}
       <Outlet />
     </>
   );

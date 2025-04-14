@@ -270,4 +270,6 @@ we're getting an error
 56. Tanstack router was fixed by claude. 
 57. Removed some unused imports in the router.tsx manually. 
 58. Asked Claude to create a router mask for the compose modal. "There is a post button in the navigation component. When I click that i want it to use a tanstack router mask of "/compose/post" and open a compose modal component. That component needs a "x" icon in the corner that will close the modal and bring them back to route before the mask. See this for documentation. https://tanstack.com/router/latest/docs/framework/react/api/router/RouterOptionsType#routemasks-property"
+59. The compose modal wipes the data from the default route. Also noticed that the default route for X is "home". Making this our default too. "The feed component should display when we're on the home route. The default route should be /home. Make this update"
+60. 
 

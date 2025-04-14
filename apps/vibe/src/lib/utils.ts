@@ -195,7 +195,7 @@ export const mockNavigationItems = [
     id: "nav-1",
     label: "Home",
     icon: "Home",
-    path: "/"
+    path: "/home"
   },
   {
     id: "nav-2",

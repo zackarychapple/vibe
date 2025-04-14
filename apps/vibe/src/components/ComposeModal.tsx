@@ -11,8 +11,8 @@ export default function ComposeModal() {
   const [content, setContent] = useState('');
 
   const handleClose = () => {
-    // Navigate back to the previous route
-    navigate({ to: "$previousRoute" });
+    // Navigate back to the home route
+    navigate({ to: "/home" });
   };
 
   return (

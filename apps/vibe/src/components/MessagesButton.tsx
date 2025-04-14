@@ -1,5 +1,5 @@
 import { Button } from "./ui/button";
-import { MessageCircle, PenSquare } from "lucide-react";
+import { PenSquare } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
 
 export default function MessagesButton() {
