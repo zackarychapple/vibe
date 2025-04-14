@@ -29,8 +29,8 @@ export default function Tweet({ avatar, name, username, verified = false, time, 
         <div className="flex-1">
           <div className="flex items-center">
             <span className="font-bold">{name}</span>
-            {verified && <span className="text-sky-500 ml-1">✓</span>}
-            <span className="text-gray-500 ml-2">
+            {verified && <span className="text-twitter-blue ml-1">✓</span>}
+            <span className="text-twitter-gray ml-2">
               @{username} · {time}
             </span>
             <Button variant="ghost" size="icon" className="ml-auto rounded-full h-8 w-8">
@@ -38,7 +38,7 @@ export default function Tweet({ avatar, name, username, verified = false, time, 
             </Button>
           </div>
           <div className="mt-1">{content}</div>
-          <div className="flex items-center justify-between mt-3 text-gray-500">
+          <div className="flex items-center justify-between mt-3 text-twitter-gray">
             <Button variant="ghost" size="sm" className="rounded-full gap-2">
               <MessageCircle className="h-4 w-4" />
               {stats.replies > 0 && <span>{stats.replies}</span>}

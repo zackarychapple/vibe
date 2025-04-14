@@ -222,3 +222,7 @@ I'm going to create a clone of X for a project. I want to use React and Shadcn. 
 44. After it decomposed the code I downloaded the zip of the code from v0 added the contents to the repo.
 45. Asked claude to analyze the folder and recreate the components into our vibe app. But before I kicked off the command I set up a `nx build vibe --watch` and opened the latest tag for the vibe application and set zephyr to live reload so I could watch the progress.
 46. "I've added a folder to our workspace called twitter-clone-v0. This is what we will begin to decompose into microfrontends. This was generated with v0 which uses next and turbopack. We will continue to use Rspack. I want you to recruite the components and styles in apps/vibe. We will not be using Next and will stick with vanilla react. Lets attempt the migration."
+47. The first migration got the text there, but the styles were all off. It looks like we forgot to add the styles compilation to Rspack. "It seems the styles are off and all of the colors are missing. We need to add the styles to compile with Rspack."
+48. Manually adding the postcss loader `pnpm add -D postcss-loader`. 
+49. Styles updated correctly and we got our first decent looking build https://zackary-chapple-2666-shell-vibe-zackarychapple-c9f68fb31-ze.zephyrcloud.app
+50. 

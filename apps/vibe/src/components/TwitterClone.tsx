@@ -6,7 +6,7 @@ import MessagesButton from "./MessagesButton";
 
 export default function TwitterClone() {
   return (
-    <div className="flex min-h-screen bg-black text-white">
+    <div className="flex min-h-screen bg-twitter-dark text-twitter-white">
       <Navigation />
       <Feed />
       <RightSidebar />

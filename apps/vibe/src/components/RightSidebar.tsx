@@ -9,7 +9,7 @@ export default function RightSidebar() {
     <div className="hidden lg:block w-80 p-4">
       <div className="sticky top-0 pt-2">
         <div className="relative mb-4">
-          <Search className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
+          <Search className="absolute left-3 top-3 h-4 w-4 text-twitter-gray" />
           <Input className="pl-10 bg-[#16181c] border-none rounded-full text-[#e7e9ea]" placeholder="Search" />
         </div>
 
@@ -18,7 +18,7 @@ export default function RightSidebar() {
             <h2 className="text-xl font-bold text-[#e7e9ea] mb-4">Verified Organizations</h2>
 
             <div className="bg-[#16181c] rounded-xl p-4 mb-4">
-              <p className="text-sm text-gray-400">Remaining ads credits</p>
+              <p className="text-sm text-twitter-gray">Remaining ads credits</p>
               <p className="text-2xl font-bold text-[#e7e9ea]">$100</p>
             </div>
 
@@ -39,7 +39,7 @@ export default function RightSidebar() {
                 Get support with an issue
                 <ChevronRight className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" className="w-full justify-between text-sky-500 hover:bg-[#16181c] rounded-full">
+              <Button variant="ghost" className="w-full justify-between text-twitter-blue hover:bg-[#16181c] rounded-full">
                 View all features
                 <ChevronRight className="h-4 w-4" />
               </Button>
@@ -136,7 +136,7 @@ export default function RightSidebar() {
               </div>
             </div>
 
-            <Button variant="ghost" className="w-full text-sky-500 mt-4 hover:bg-[#16181c]">
+            <Button variant="ghost" className="w-full text-twitter-blue mt-4 hover:bg-[#16181c]">
               Show more
             </Button>
           </div>

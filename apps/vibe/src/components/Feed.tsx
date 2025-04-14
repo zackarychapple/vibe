@@ -9,14 +9,14 @@ export default function Feed() {
   const [activeTab, setActiveTab] = useState("for-you");
 
   return (
-    <div className="flex-1 border-x border-gray-800 max-w-2xl">
-      <div className="sticky top-0 z-10 bg-black backdrop-blur-sm">
+    <div className="flex-1 border-x border-twitter-gray-dark max-w-2xl">
+      <div className="sticky top-0 z-10 bg-twitter-dark backdrop-blur-sm">
         <div className="grid grid-cols-2 h-14">
           <div
             className={`flex items-center justify-center h-full ${
               activeTab === "for-you"
-                ? "bg-white text-black border-b-2 border-sky-500"
-                : "text-gray-500 hover:bg-gray-900/20"
+                ? "bg-white text-black border-b-2 border-twitter-blue"
+                : "text-twitter-gray hover:bg-twitter-dark-hover"
             }`}
             onClick={() => setActiveTab("for-you")}
           >
@@ -25,8 +25,8 @@ export default function Feed() {
           <div
             className={`flex items-center justify-center h-full ${
               activeTab === "following"
-                ? "bg-white text-black border-b-2 border-sky-500"
-                : "text-gray-500 hover:bg-gray-900/20"
+                ? "bg-white text-black border-b-2 border-twitter-blue"
+                : "text-twitter-gray hover:bg-twitter-dark-hover"
             }`}
             onClick={() => setActiveTab("following")}
           >
@@ -35,7 +35,7 @@ export default function Feed() {
         </div>
       </div>
 
-      <div className="p-4 border-b border-gray-800">
+      <div className="p-4 border-b border-twitter-gray-dark">
         <div className="flex gap-4">
           <Avatar className="h-10 w-10">
             <AvatarImage src="/src/assets/placeholder.svg" alt="User" />
@@ -43,11 +43,11 @@ export default function Feed() {
           </Avatar>
           <div className="flex-1">
             <Input
-              className="bg-transparent border-none text-lg placeholder:text-gray-500 focus-visible:ring-0 focus-visible:ring-offset-0"
-              placeholder="What's happening?"
+              className="bg-transparent border-none text-lg placeholder:text-twitter-gray focus-visible:ring-0 focus-visible:ring-offset-0"
+              placeholder="What's happening?" style={{ backgroundColor: 'transparent', border: 'none', color: 'white' }}
             />
             <div className="flex items-center mt-4">
-              <div className="flex gap-2 text-sky-500">
+              <div className="flex gap-2 text-twitter-blue">
                 <Button variant="ghost" size="icon" className="rounded-full h-9 w-9">
                   <ImageIcon className="h-5 w-5" />
                 </Button>
@@ -64,13 +64,13 @@ export default function Feed() {
                   <Star className="h-5 w-5" />
                 </Button>
               </div>
-              <Button className="ml-auto rounded-full bg-sky-500 hover:bg-sky-600 px-4">Post</Button>
+              <Button className="ml-auto rounded-full bg-twitter-blue hover:bg-twitter-blue-dark px-4">Post</Button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="text-center py-3 text-sky-500 text-sm border-b border-gray-800">Show 35 posts</div>
+      <div className="text-center py-3 text-twitter-blue text-sm border-b border-twitter-gray-dark">Show 35 posts</div>
 
       <Tweet
         avatar="/src/assets/placeholder.svg"
@@ -91,7 +91,7 @@ export default function Feed() {
         content={
           <>
             <p>
-              Things we've been cooking <span className="text-sky-500">@LynxJS.org</span> in react to the community:
+              Things we've been cooking <span className="text-twitter-blue">@LynxJS.org</span> in react to the community:
             </p>
             <ol className="list-decimal pl-5 mt-2">
               <li>Native module; NAPI FFI</li>
@@ -124,15 +124,15 @@ export default function Feed() {
                     <AvatarFallback>L</AvatarFallback>
                   </Avatar>
                   <span className="font-bold">Lynx</span>
-                  <span className="text-sky-500 ml-1">✓</span>
-                  <span className="text-gray-500 ml-2">@LynxJS.org · Mar 19</span>
+                  <span className="text-twitter-blue ml-1">✓</span>
+                  <span className="text-twitter-gray ml-2">@LynxJS.org · Mar 19</span>
                 </div>
                 <p className="mt-2">🚀 The 2025 roadmap for Lynx is live!</p>
                 <p className="mt-2 text-sm">
                   Discover our steady release schedule, expanded platform support (desktop and more), new capabilities,
                   UI elements, and more. Check it out!...
                 </p>
-                <p className="text-sky-500 text-sm mt-1">Show more</p>
+                <p className="text-twitter-blue text-sm mt-1">Show more</p>
               </div>
             </div>
           </>

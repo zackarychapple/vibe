@@ -14,6 +14,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        black: '#000',
+        white: '#fff',
+        // Twitter blue colors
+        sky: {
+          500: '#0ea5e9',
+          600: '#0284c7',
+        },
+        // Twitter gray colors
+        gray: {
+          500: '#71717a',
+          800: '#1f2937',
+          900: '#111827',
+        },
+        // UI theme colors
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -46,6 +60,15 @@ module.exports = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
+        },
+        // Twitter UI specific colors
+        'twitter': {
+          'blue': '#1d9bf0',
+          'blue-dark': '#1a8cd8',
+          'dark': '#000',
+          'dark-lighter': '#16181c',
+          'gray': '#71717a',
+          'gray-dark': '#2f3336',
         },
       },
       borderRadius: {

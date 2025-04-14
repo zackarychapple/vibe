@@ -1,5 +1,6 @@
 import { rspack } from "@rspack/core";
-import {withZephyr} from "zephyr-rspack-plugin";
+import { withZephyr } from "zephyr-rspack-plugin";
+import * as path from "node:path";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -9,13 +10,30 @@ const config = {
     main: "./src/main.tsx"
   },
   resolve: {
-    extensions: ["...", ".ts", ".tsx", ".jsx"]
+    extensions: ["...", ".ts", ".tsx", ".jsx", ".css"],
+    alias: {
+      "@": path.resolve(__dirname, "src")
+    }
   },
   module: {
     rules: [
       {
-        test: /\.svg$/,
-        type: "asset"
+        test: /\.css$/,
+        use: [
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                config: path.resolve(__dirname, "postcss.config.js")
+              }
+            }
+          }
+        ],
+        type: "css"
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: "asset/resource"
       },
       {
         test: /\.(jsx?|tsx?)$/,
