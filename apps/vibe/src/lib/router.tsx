@@ -4,8 +4,8 @@ import {
   createRoute
 } from '@tanstack/react-router';
 import Root from '../routes/Root';
-import Index from '../routes/Index';
 import ComposeModal from '../components/ComposeModal';
+import Index from "../routes/Index";
 
 // Create a root route with the TwitterClone layout
 const rootRoute = createRootRoute({
@@ -23,12 +23,6 @@ const rootRoute = createRootRoute({
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/home',
-  component: Index
-});
-
-const feedRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/feed',
   component: Index
 });
 
@@ -163,7 +157,6 @@ const composeRoute = createRoute({
 // Define the route tree
 const routeTree = rootRoute.addChildren([
   homeRoute,
-  feedRoute,
   exploreRoute,
   notificationsRoute,
   messagesRoute,
