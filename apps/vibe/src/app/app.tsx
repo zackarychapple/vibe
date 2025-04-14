@@ -1,9 +1,9 @@
 import '../styles.css';
-import TwitterClone from '../components/TwitterClone';
-import { Route, Routes, Link } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { RouterProvider } from '@tanstack/react-router';
+import { router } from '../lib/router';
 
-// Create a client
+// Create a query client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -16,32 +16,7 @@ const queryClient = new QueryClient({
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes>
-        <Route
-          path="/"
-          element={<TwitterClone />}
-        />
-        <Route
-          path="/feed"
-          element={<TwitterClone />}
-        />
-        <Route
-          path="/explore"
-          element={<TwitterClone />}
-        />
-        <Route
-          path="/notifications"
-          element={<TwitterClone />}
-        />
-        <Route
-          path="/messages"
-          element={<TwitterClone />}
-        />
-        <Route
-          path="/profile"
-          element={<TwitterClone />}
-        />
-      </Routes>
+      <RouterProvider router={router} />
     </QueryClientProvider>
   );
 }

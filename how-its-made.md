@@ -227,3 +227,44 @@ I'm going to create a clone of X for a project. I want to use React and Shadcn. 
 49. Styles updated correctly and we got our first decent looking build https://zackary-chapple-2666-shell-vibe-zackarychapple-c9f68fb31-ze.zephyrcloud.app
 50. The data is currently hardcoded, asked Claude to make it dynamic "Lets extract all of the data for each of the components and use tanstack query to fetch the data from json objects that we have hardcoded for now. Please review the documentation for tanstack query v5 https://tanstack.com/query/latest/docs/framework/react/overview and extract the data for the components."
 51. Removed hardcoded nx-welcome file that is no longer needed. 
+52. Added tanstack router. "Now that we are using tanstack query lets add tanstack router. The current page is going to be the root route."
+53. I got an error
+```bash
+ERROR in ./src/lib/router.ts
+  × Module build failed:
+  ├─▶   ×
+  │     │   × Expected '>', got 'className'
+  │     │     ╭─[/Users/zackarychapple/code/vibe/apps/vibe/src/lib/router.ts:32:1]
+  │     │  29 │   getParentRoute: () => rootRoute,
+  │     │  30 │   path: '/explore',
+  │     │  31 │   component: () => (
+  │     │  32 │     <div className="p-4">
+  │     │     ·          ─────────
+  │     │  33 │       <h1 className="text-2xl font-bold mb-4">Explore</h1>
+  │     │  34 │       <p>Explore content will be displayed here.</p>
+  │     │  35 │     </div>
+  │     │     ╰────
+  │     │
+  │   
+  ╰─▶ Syntax Error
+
+
+Rspack compiled with 1 error in 369 ms
+```
+54. I found that claude was using tanstack/router, not tanstack-react-router. I told it "you should use @tanstack/react-router not @tanstack/router". There was still some issues with tanstack router.
+```bash
+main.tsx:7 Uncaught TypeError: i4.initialize is not a function
+    at main.tsx:7:1
+    at main.js:1:308586
+    at main.js:1:308590 
+```
+55. I told claude
+```bash
+we're getting an error
+    main.tsx:7 Uncaught TypeError: i4.initialize is not a function
+    at main.tsx:7:1
+    at main.js:1:308586
+    at main.js:1:308590
+    I believe you were following documentation for the old tanstack router, can you update the configuration
+```
+56. Tanstack router was fixed by claude. 

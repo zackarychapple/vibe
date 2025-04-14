@@ -14,7 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { useNavigationItems, useUser } from "../lib/query";
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 
 // Map icon names to Lucide icon components
 const iconMap: Record<string, React.ElementType> = {
@@ -57,7 +57,7 @@ export default function Navigation() {
                 className="w-full justify-start text-lg font-semibold hover:bg-twitter-dark-hover rounded-full"
                 asChild
               >
-                <Link to={item.path}>
+                <Link to={item.path} activeProps={{ className: "bg-twitter-dark-hover" }}>
                   <IconComponent className="mr-4 h-6 w-6" />
                   {item.label}
                 </Link>

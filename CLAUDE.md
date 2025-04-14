@@ -46,3 +46,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Valid scopes: `vibe`, `feed`, `grok`, `create`
 - Format: `type(scope): message` (e.g., `feat(feed): add post component`)
 - Types: feat, fix, docs, style, refactor, test, chore, etc.
+
+## Important Instructions for Claude
+- NEVER commit changes automatically; always show proposed changes and wait for explicit user confirmation
+- Do not push code to remote repositories
+- For large changes, show staged changes before recommending commit

@@ -3,6 +3,7 @@ import Feed from "./Feed";
 import RightSidebar from "./RightSidebar";
 import BottomNavigation from "./BottomNavigation";
 import MessagesButton from "./MessagesButton";
+import { Outlet } from "@tanstack/react-router";
 
 export default function TwitterClone() {
   return (
