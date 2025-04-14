@@ -198,3 +198,25 @@ Rspack compiled successfully (58dc56d572510aea)
 33. This was still broken due to some issues with compatibility of Zephyr and the Nx config wrapper for Rspack, and the newer versions of Rspack. Moved to manual Rspack config.
 34. Asked Claude to move these changes to the other Rspack configs. `I made some manual changes to the vibe/rspack.config.ts, help me apply these changes to the other rspack configs.`
 35. There was some issues with the configuration that Claude generated, manually corrected these to be able to run the builds successfully.
+36. Switched to v0 to create the initial UI. Used the following prompt with three screenshots of X, one of the whole screen, one of the page with Grok in the navigation, and one of the compose modal.
+```markdown
+I'm going to create a clone of X for a project. I want to use React and Shadcn. I want you to recreate the screenshots of X that I uploaded. I have requirements below:
+- Must use React
+- Must use Shadcn
+- Must use typescript
+- Must use Tanstack Router
+- Must use Tanstack Query
+- All data should be from json objects
+- There should be a layout component that has the entire application shell that includes the navigation on the left side as well as an router outlet that is displaying the feed component when at root
+- There should be a single component for the feed
+- There should be a single component for the grok page that displays when at /grok
+- There should be a create post modal that opens when clicking "Post" in the app shell, this modal should also change the route to /compose/post (without changing the content behind the modal)
+```
+37. It got an error saying a component could not be found. Asked it to fix it with v0. Did this four times, on the fourth attempt it removed tanstack router while trying to fix it. It still didn't work. Started again with a less complex requirements.
+38. I took a screenshot of the X page and said to `recreate this UI with React and Shadcn` then used the "magic" icon to enhance the prompt and v0 gave me this `Develop a user interface (UI) using React and Shadcn. The UI should include the following components: a navigation bar with a logo and links, a main content area with a title and a brief description, a button, and a form with input fields for name, email, and a message, along with a submit button. The design should be responsive, adapting to different screen sizes. Ensure the UI is visually appealing and follows modern design principles. The components should be styled using Shadcn's pre-built components and utilities.` the output was trash and didn't use the screenshot.
+39. Tried a third time with the screenshot and this prompt. `Recreate this screenshot. The code should be responsive, adapting to different screen sizes. The components should be styled using Shadcn's pre-built components and utilities along with tailwind.`
+40. This time it was a lot closer. I had it fix the hover colors in the left nav with a screen shot of what it "should" look like and "The hover states on the left nav are the wrong colors this is what they should be."
+41. Asked it to fix the UI for the side panel as well. "The sections on the right side are also the wrong colors. Lets fix those next. This is what they should look like vs what you have. The one that is rgba(0,0,0,0.00) background is the correct one. Font color should be rgb(231, 233, 234) by default."
+42. "The for you tab is incorrect color as well.  the background should be the black color we're using with a blue line like the screenshot I'm attaching. Your version also attached has a white background behind for you." v0 struggled with this for several iterations. Gave up asking it to fix it.
+43. To this point v0 was doing everything in a single component. "Decompose the Navigation, Feed, Tweets, Bottom Navigation, and Messages Button into their own component files."
+44. After it decomposed the code I downloaded the zip of the code from v0 added the contents to the repo
