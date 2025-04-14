@@ -1,8 +1,9 @@
 const { NxAppRspackPlugin } = require('@nx/rspack/app-plugin');
 const { NxReactRspackPlugin } = require('@nx/rspack/react-plugin');
 const { join } = require('path');
+const {withZephyr} = require('zephyr-rspack-plugin');
 
-module.exports = {
+module.exports = withZephyr()({
   output: {
     path: join(__dirname, 'dist'),
   },
@@ -31,4 +32,4 @@ module.exports = {
       // svgr: false
     }),
   ],
-};
+});

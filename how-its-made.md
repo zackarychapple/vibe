@@ -63,3 +63,5 @@ NX   Welcome to the Nx community! 👋
   Would you like me to commit these changes or set up Module Federation to connect the host and remotes?
 ```
 10. Realized that there was no "cross-cutting" scope, so manually added common to commitlint scopes.
+11. Added Zephyr `pnpm add zephyr-rspack-plugin@latest`
+12. Manually added zephyr to vibe rspack.config.js `const {withZephyr} = require('zephyr-rspack-plugin');` and `module.exports = withZephyr()({ /* existing config */ })` per [docs](https://docs.zephyr-cloud.io/recipes/react-rspack-nx)
