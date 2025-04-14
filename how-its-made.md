@@ -197,3 +197,4 @@ Rspack compiled successfully (58dc56d572510aea)
 32. `NX_DAEMON=false nx build vibe --skip-nx-cache`
 33. This was still broken due to some issues with compatibility of Zephyr and the Nx config wrapper for Rspack, and the newer versions of Rspack. Moved to manual Rspack config.
 34. Asked Claude to move these changes to the other Rspack configs. `I made some manual changes to the vibe/rspack.config.ts, help me apply these changes to the other rspack configs.`
+35. There was some issues with the configuration that Claude generated, manually corrected these to be able to run the builds successfully.

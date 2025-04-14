@@ -1,5 +1,5 @@
 import { rspack } from "@rspack/core";
-import {withZephyr} from "zephyr-rspack-plugin";
+import { withZephyr } from "zephyr-rspack-plugin";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -50,17 +50,6 @@ const config = {
       }
     ]
   },
-  output: {
-    path: __dirname + "/dist"
-  },
-  devServer: {
-    port: 4202,
-    historyApiFallback: {
-      index: "/index.html",
-      disableDotRule: true,
-      htmlAcceptHeaders: ["text/html", "application/xhtml+xml"],
-    },
-  },
   plugins: [
     new rspack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
@@ -69,7 +58,7 @@ const config = {
     new rspack.HtmlRspackPlugin({
       template: "./src/index.html"
     })
-  ].filter(Boolean),
+  ],
   experiments: {
     css: true
   }

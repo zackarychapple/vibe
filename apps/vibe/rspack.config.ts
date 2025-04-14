@@ -2,8 +2,7 @@ import { rspack } from "@rspack/core";
 import {withZephyr} from "zephyr-rspack-plugin";
 
 const isDev = process.env.NODE_ENV === "development";
-console.log('omg')
-console.log(__dirname)
+
 const config = {
   context: __dirname,
   entry: {
@@ -59,7 +58,7 @@ const config = {
     new rspack.HtmlRspackPlugin({
       template: "./src/index.html"
     })
-  ].filter(Boolean),
+  ],
   experiments: {
     css: true
   }
