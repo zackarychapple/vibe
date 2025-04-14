@@ -178,7 +178,11 @@ importers:
 
   apps/grok-e2e: {}
 
-  apps/vibe: {}
+  apps/vibe:
+    dependencies:
+      '@tanstack/react-query':
+        specifier: ^5.74.3
+        version: 5.74.3(react@18.3.1)
 
 packages:
 
@@ -2378,6 +2382,14 @@ packages:
 
   '@swc/types@0.1.21':
     resolution: {integrity: sha512-2YEtj5HJVbKivud9N4bpPBAyZhj4S2Ipe5LkUG94alTpr7in/GU/EARgPAd3BwU+YOmFVJC2+kjqhGRi3r0ZpQ==}
+
+  '@tanstack/query-core@5.74.3':
+    resolution: {integrity: sha512-Mqk+5o3qTuAiZML248XpNH8r2cOzl15+LTbUsZQEwvSvn1GU4VQhvqzAbil36p+MBxpr/58oBSnRzhrBevDhfg==}
+
+  '@tanstack/react-query@5.74.3':
+    resolution: {integrity: sha512-QrycUn0wxjVPzITvQvOxFRdhlAwIoOQSuav7qWD4SWCoKCdLbyRZ2vji2GuBq/glaxbF4wBx3fqcYRDOt8KDTA==}
+    peerDependencies:
+      react: ^18 || ^19
 
   '@testing-library/dom@10.4.0':
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
@@ -8974,6 +8986,13 @@ snapshots:
   '@swc/types@0.1.21':
     dependencies:
       '@swc/counter': 0.1.3
+
+  '@tanstack/query-core@5.74.3': {}
+
+  '@tanstack/react-query@5.74.3(react@18.3.1)':
+    dependencies:
+      '@tanstack/query-core': 5.74.3
+      react: 18.3.1
 
   '@testing-library/dom@10.4.0':
     dependencies:

@@ -4,5 +4,8 @@
   "private": true,
   "nx": {
     "name": "vibe"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.74.3"
   }
 }

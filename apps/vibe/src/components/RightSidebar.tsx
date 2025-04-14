@@ -3,8 +3,11 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Separator } from "./ui/separator";
 import { ChevronRight, Search } from "lucide-react";
+import { useTrends } from "../lib/query";
 
 export default function RightSidebar() {
+  const { data: trends = [], isLoading: isTrendsLoading } = useTrends();
+
   return (
     <div className="hidden lg:block w-80 p-4">
       <div className="sticky top-0 pt-2">
@@ -56,85 +59,40 @@ export default function RightSidebar() {
               </div>
             </div>
 
-            <div className="space-y-6">
-              <div>
-                <h3 className="font-bold text-[#e7e9ea] mb-1">OpenAI Launches GPT-4.1 Models</h3>
-                <div className="flex items-center text-sm text-gray-500">
-                  <div className="flex -space-x-1 mr-2">
-                    <Avatar className="h-5 w-5 border border-black">
-                      <AvatarImage src="/src/assets/placeholder.svg" alt="User" />
-                      <AvatarFallback>U1</AvatarFallback>
-                    </Avatar>
-                    <Avatar className="h-5 w-5 border border-black">
-                      <AvatarImage src="/src/assets/placeholder.svg" alt="User" />
-                      <AvatarFallback>U2</AvatarFallback>
-                    </Avatar>
+            {isTrendsLoading ? (
+              // Loading state for trends
+              <div className="space-y-6">
+                {Array(4).fill(0).map((_, i) => (
+                  <div key={i} className="space-y-2">
+                    <div className="h-5 w-full bg-twitter-dark-hover animate-pulse rounded" />
+                    <div className="h-4 w-3/4 bg-twitter-dark-hover animate-pulse rounded" />
+                    {i < 3 && <Separator className="bg-[#2f3336] mt-4" />}
                   </div>
-                  <span>3 hours ago · Technology · 5.3K posts</span>
-                </div>
+                ))}
               </div>
-
-              <Separator className="bg-[#2f3336]" />
-
-              <div>
-                <h3 className="font-bold text-[#e7e9ea] mb-1">San Diego Earthquake: USGS Confirms 5.2 Magnitude</h3>
-                <div className="flex items-center text-sm text-gray-500">
-                  <div className="flex -space-x-1 mr-2">
-                    <Avatar className="h-5 w-5 border border-black">
-                      <AvatarImage src="/src/assets/placeholder.svg" alt="User" />
-                      <AvatarFallback>U3</AvatarFallback>
-                    </Avatar>
-                    <Avatar className="h-5 w-5 border border-black">
-                      <AvatarImage src="/src/assets/placeholder.svg" alt="User" />
-                      <AvatarFallback>U4</AvatarFallback>
-                    </Avatar>
+            ) : (
+              <div className="space-y-6">
+                {trends.map((trend, index) => (
+                  <div key={trend.id}>
+                    <h3 className="font-bold text-[#e7e9ea] mb-1">{trend.title}</h3>
+                    <div className="flex items-center text-sm text-gray-500">
+                      <div className="flex -space-x-1 mr-2">
+                        <Avatar className="h-5 w-5 border border-black">
+                          <AvatarImage src="/src/assets/placeholder.svg" alt="User" />
+                          <AvatarFallback>U1</AvatarFallback>
+                        </Avatar>
+                        <Avatar className="h-5 w-5 border border-black">
+                          <AvatarImage src="/src/assets/placeholder.svg" alt="User" />
+                          <AvatarFallback>U2</AvatarFallback>
+                        </Avatar>
+                      </div>
+                      <span>{trend.time} · {trend.category} · {trend.postCount.toLocaleString()} posts</span>
+                    </div>
+                    {index < trends.length - 1 && <Separator className="bg-[#2f3336] mt-4" />}
                   </div>
-                  <span>2 hours ago · Earthquake · 15K posts</span>
-                </div>
+                ))}
               </div>
-
-              <Separator className="bg-[#2f3336]" />
-
-              <div>
-                <h3 className="font-bold text-[#e7e9ea] mb-1">
-                  Armed Intruder Arrested at UnitedHealthcare HQ in Minnetonka
-                </h3>
-                <div className="flex items-center text-sm text-gray-500">
-                  <div className="flex -space-x-1 mr-2">
-                    <Avatar className="h-5 w-5 border border-black">
-                      <AvatarImage src="/src/assets/placeholder.svg" alt="User" />
-                      <AvatarFallback>U5</AvatarFallback>
-                    </Avatar>
-                    <Avatar className="h-5 w-5 border border-black">
-                      <AvatarImage src="/src/assets/placeholder.svg" alt="User" />
-                      <AvatarFallback>U6</AvatarFallback>
-                    </Avatar>
-                  </div>
-                  <span>2 hours ago · Crime · 358 posts</span>
-                </div>
-              </div>
-
-              <Separator className="bg-[#2f3336]" />
-
-              <div>
-                <h3 className="font-bold text-[#e7e9ea] mb-1">
-                  General Matter Launches to Revive U.S. Uranium Enrichment
-                </h3>
-                <div className="flex items-center text-sm text-gray-500">
-                  <div className="flex -space-x-1 mr-2">
-                    <Avatar className="h-5 w-5 border border-black">
-                      <AvatarImage src="/src/assets/placeholder.svg" alt="User" />
-                      <AvatarFallback>U7</AvatarFallback>
-                    </Avatar>
-                    <Avatar className="h-5 w-5 border border-black">
-                      <AvatarImage src="/src/assets/placeholder.svg" alt="User" />
-                      <AvatarFallback>U8</AvatarFallback>
-                    </Avatar>
-                  </div>
-                  <span>3 hours ago · Nuclear · 431 posts</span>
-                </div>
-              </div>
-            </div>
+            )}
 
             <Button variant="ghost" className="w-full text-twitter-blue mt-4 hover:bg-[#16181c]">
               Show more

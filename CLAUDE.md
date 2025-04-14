@@ -2,16 +2,22 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Project Setup
+- Package manager: pnpm (use pnpm instead of npm/yarn)
+- Monorepo management: NX
+- Module Federation for microfrontends
+
 ## Build Commands
-- Build all apps: `npx nx run-many --target=build --all`
-- Build specific app: `npx nx build [app-name]` (e.g., `npx nx build feed`)
+- Install dependencies: `pnpm install`
+- Build all apps: `pnpm nx run-many --target=build --all`
+- Build specific app: `pnpm nx build [app-name]` (e.g., `pnpm nx build feed`)
 - Start dev server:
-  - Host: `npx nx serve vibe`
-  - Remotes: `npx nx serve feed`, `npx nx serve grok`, `npx nx serve create`
-- Run tests: `npx nx test [app-name]` (e.g., `npx nx test vibe`)
-- Run single test: `npx nx test [app-name] -- -t "test name"`
-- Type check: `npx nx typecheck [app-name]`
-- Check affected: `npx nx affected --target=build`
+  - Host: `pnpm nx serve vibe`
+  - Remotes: `pnpm nx serve feed`, `pnpm nx serve grok`, `pnpm nx serve create`
+- Run tests: `pnpm nx test [app-name]` (e.g., `pnpm nx test vibe`)
+- Run single test: `pnpm nx test [app-name] -- -t "test name"`
+- Type check: `pnpm nx typecheck [app-name]`
+- Check affected: `pnpm nx affected --target=build`
 
 ## Code Style Guidelines
 - Indentation: 2 spaces (defined in .editorconfig)

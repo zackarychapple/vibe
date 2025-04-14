@@ -4,9 +4,19 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { BarChart2, ImageIcon, ListMusic, MapPin, Star } from "lucide-react";
 import Tweet from "./Tweet";
+import { useTweets, useUser, useUsers } from "../lib/query";
+import { User } from "../lib/utils";
 
 export default function Feed() {
   const [activeTab, setActiveTab] = useState("for-you");
+  const { data: tweets = [], isLoading: isTweetsLoading } = useTweets();
+  const { data: users = [], isLoading: isUsersLoading } = useUsers();
+  const { data: currentUser } = useUser("user-1"); // Assuming user-1 is the logged-in user
+
+  // Helper function to find user by userId
+  const getUserById = (userId: string): User | undefined => {
+    return users.find(user => user.id === userId);
+  };
 
   return (
     <div className="flex-1 border-x border-twitter-gray-dark max-w-2xl">
@@ -38,8 +48,8 @@ export default function Feed() {
       <div className="p-4 border-b border-twitter-gray-dark">
         <div className="flex gap-4">
           <Avatar className="h-10 w-10">
-            <AvatarImage src="/src/assets/placeholder.svg" alt="User" />
-            <AvatarFallback>U</AvatarFallback>
+            <AvatarImage src={currentUser?.avatar || "/src/assets/placeholder.svg"} alt={currentUser?.name || "User"} />
+            <AvatarFallback>{currentUser?.name?.charAt(0) || "U"}</AvatarFallback>
           </Avatar>
           <div className="flex-1">
             <Input
@@ -70,85 +80,55 @@ export default function Feed() {
         </div>
       </div>
 
-      <div className="text-center py-3 text-twitter-blue text-sm border-b border-twitter-gray-dark">Show 35 posts</div>
-
-      <Tweet
-        avatar="/src/assets/placeholder.svg"
-        name="Russell Canfield"
-        username="RussellCanfield"
-        verified={true}
-        time="11m"
-        content="Who is using GPT 4.1 on Wingman?"
-        stats={{ replies: 0, retweets: 0, likes: 1, views: 17 }}
-      />
-
-      <Tweet
-        avatar="/src/assets/placeholder.svg"
-        name="Xuan Huang · 黄玄"
-        username="Huxpro"
-        verified={true}
-        time="3h"
-        content={
-          <>
-            <p>
-              Things we've been cooking <span className="text-twitter-blue">@LynxJS.org</span> in react to the community:
-            </p>
-            <ol className="list-decimal pl-5 mt-2">
-              <li>Native module; NAPI FFI</li>
-              <li>New fwk intergration; vanilla JS</li>
-              <li>More native elements/components</li>
-              <li>More platform (desktop, Harmony)</li>
-              <li>Graphics (Canvas, Lottie)</li>
-              <li>AI friendliness</li>
-            </ol>
-            <p className="mt-2">Thanks for the feedback!</p>
-          </>
-        }
-        stats={{ replies: 2, retweets: 2, likes: 43, views: 1400 }}
-      />
-
-      <Tweet
-        avatar="/src/assets/placeholder.svg"
-        name="Xuan Huang · 黄玄"
-        username="Huxpro"
-        verified={true}
-        time="3h"
-        content={
-          <>
-            <p>Read our official roadmap:</p>
-            <div className="mt-3 border border-gray-800 rounded-xl overflow-hidden">
-              <div className="p-3">
-                <div className="flex items-center">
-                  <Avatar className="h-5 w-5 mr-2">
-                    <AvatarImage src="/src/assets/placeholder.svg" alt="Lynx" />
-                    <AvatarFallback>L</AvatarFallback>
-                  </Avatar>
-                  <span className="font-bold">Lynx</span>
-                  <span className="text-twitter-blue ml-1">✓</span>
-                  <span className="text-twitter-gray ml-2">@LynxJS.org · Mar 19</span>
+      {(isTweetsLoading || isUsersLoading) ? (
+        // Loading state for tweets
+        <div className="space-y-4 p-4">
+          {Array(3).fill(0).map((_, i) => (
+            <div key={i} className="flex gap-3">
+              <div className="h-10 w-10 rounded-full bg-twitter-dark-hover animate-pulse" />
+              <div className="flex-1">
+                <div className="h-4 w-32 bg-twitter-dark-hover animate-pulse rounded mb-2" />
+                <div className="h-3 w-24 bg-twitter-dark-hover animate-pulse rounded mb-3" />
+                <div className="h-24 bg-twitter-dark-hover animate-pulse rounded mb-3" />
+                <div className="flex justify-between">
+                  {Array(4).fill(0).map((_, j) => (
+                    <div key={j} className="h-3 w-12 bg-twitter-dark-hover animate-pulse rounded" />
+                  ))}
                 </div>
-                <p className="mt-2">🚀 The 2025 roadmap for Lynx is live!</p>
-                <p className="mt-2 text-sm">
-                  Discover our steady release schedule, expanded platform support (desktop and more), new capabilities,
-                  UI elements, and more. Check it out!...
-                </p>
-                <p className="text-twitter-blue text-sm mt-1">Show more</p>
               </div>
             </div>
-          </>
-        }
-        stats={{ replies: 1, retweets: 0, likes: 4, views: 710 }}
-      />
+          ))}
+        </div>
+      ) : (
+        <>
+          <div className="text-center py-3 text-twitter-blue text-sm border-b border-twitter-gray-dark">
+            Show {tweets.length} posts
+          </div>
 
-      <Tweet
-        avatar="/src/assets/placeholder.svg"
-        name="Xuan Huang · 黄玄"
-        username="Huxpro"
-        verified={true}
-        time="3h"
-        content="Ahh it feels good to finally shake off the jet lag and get back to work"
-        stats={{ replies: 0, retweets: 0, likes: 0, views: 0 }}
-      />
+          {tweets.map(tweet => {
+            const user = getUserById(tweet.userId);
+            if (!user) return null;
+            
+            return (
+              <Tweet
+                key={tweet.id}
+                tweetId={tweet.id}
+                avatar={user.avatar}
+                name={user.name}
+                username={user.username}
+                verified={user.verified}
+                time={tweet.time}
+                content={tweet.content}
+                stats={tweet.stats}
+                quotedTweet={tweet.quotedTweet ? {
+                  ...tweet.quotedTweet,
+                  user: getUserById(tweet.quotedTweet.userId)
+                } : undefined}
+              />
+            );
+          })}
+        </>
+      )}
     </div>
   );
 }
