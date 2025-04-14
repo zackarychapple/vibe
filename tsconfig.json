@@ -5,6 +5,24 @@
   "references": [
     {
       "path": "./apps/vibe"
+    },
+    {
+      "path": "./apps/feed-e2e"
+    },
+    {
+      "path": "./apps/feed"
+    },
+    {
+      "path": "./apps/grok-e2e"
+    },
+    {
+      "path": "./apps/grok"
+    },
+    {
+      "path": "./apps/create-e2e"
+    },
+    {
+      "path": "./apps/create"
     }
   ]
 }

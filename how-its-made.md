@@ -44,3 +44,22 @@ NX   Welcome to the Nx community! 👋
 6. Echo config `echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js`
 7. Add commit lint rules and guidance to claude config. `We will be using commitlint as we work on this project. As we create each microfrontend we will need to add it to the scopes for commit lint config. Lets add vibe as one of the valid scopes.`
 8. Claude asked to add husky, allowed it to do so. 
+9. Ask Claude to add the new remotes `We are going to be creating a clone of the popular social media platform X. As we do so we will be leveraging micro frontends. vibe is going to be our main host application and will serve as our app shell. We will need to create 3 additional remotes. The remotes are feed, grok, and create. We will use the nx generate command nx generate @nx/react:app apps/{remoteName}. All of the remotes should use rspack as their bundler.`
+```bash
+⏺ Great! I've successfully set up the microfrontend architecture for your X clone with:
+
+  1. Created three remote applications using Nx:
+    - feed: For displaying content
+    - grok: For AI capabilities
+    - create: For post creation
+  2. Updated the commitlint configuration to include all the microfrontends as valid scopes
+  3. Updated the CLAUDE.md file with:
+    - Project architecture information
+    - Build commands for all microfrontends
+    - Updated commit guidelines
+
+  The project structure is now set up with a host app (vibe) and three remote microfrontends (feed, grok, create), all configured with the rspack bundler.
+
+  Would you like me to commit these changes or set up Module Federation to connect the host and remotes?
+```
+10. Realized that there was no "cross-cutting" scope, so manually added common to commitlint scopes.

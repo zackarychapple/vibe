@@ -3,11 +3,15 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Build Commands
-- Build app: `npx nx build vibe`
-- Start dev server: `npx nx serve vibe`
-- Run tests: `npx nx test vibe`
-- Run single test: `npx nx test vibe -- -t "test name"`
-- Type check: `npx nx typecheck vibe`
+- Build all apps: `npx nx run-many --target=build --all`
+- Build specific app: `npx nx build [app-name]` (e.g., `npx nx build feed`)
+- Start dev server:
+  - Host: `npx nx serve vibe`
+  - Remotes: `npx nx serve feed`, `npx nx serve grok`, `npx nx serve create`
+- Run tests: `npx nx test [app-name]` (e.g., `npx nx test vibe`)
+- Run single test: `npx nx test [app-name] -- -t "test name"`
+- Type check: `npx nx typecheck [app-name]`
+- Check affected: `npx nx affected --target=build`
 
 ## Code Style Guidelines
 - Indentation: 2 spaces (defined in .editorconfig)
@@ -23,8 +27,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Utilities: camelCase for utility functions and files
 - Error handling: Prefer early returns, use try/catch for async operations
 
+## Project Architecture
+- Microfrontend architecture for an X clone
+- `vibe`: Host application (app shell)
+- Remote microfrontends:
+  - `feed`: Displays feed content
+  - `grok`: AI capabilities
+  - `create`: Post creation functionality
+
 ## Commit Guidelines
 - Uses commitlint with conventional commit format
-- Valid scopes: `vibe` (add new microfrontend scopes as they're created)
-- Format: `type(scope): message` (e.g., `feat(vibe): add new component`)
+- Valid scopes: `vibe`, `feed`, `grok`, `create`
+- Format: `type(scope): message` (e.g., `feat(feed): add post component`)
 - Types: feat, fix, docs, style, refactor, test, chore, etc.

@@ -65,10 +65,21 @@
         "buildDepsTargetName": "build-deps",
         "watchDepsTargetName": "watch-deps"
       }
+    },
+    {
+      "plugin": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
     }
   ],
   "targetDefaults": {
     "test": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "e2e-ci--**/*": {
       "dependsOn": [
         "^build"
       ]
