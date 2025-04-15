@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { mockTweets, mockUsers, mockTrends, mockNavigationItems, User, Tweet, Trend, NavigationItem } from './utils';
+import { mockUsers, mockTrends, mockNavigationItems, User, Tweet, Trend, NavigationItem } from './utils';
 
 // Query keys
 export const queryKeys = {
@@ -11,26 +11,9 @@ export const queryKeys = {
   navigationItems: ['navigation-items'] as const,
 };
 
-// Query functions
-const fetchUsers = async (): Promise<User[]> => {
-  // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 500));
-  return mockUsers;
-};
-
 const fetchUser = async (id: string): Promise<User | undefined> => {
   await new Promise(resolve => setTimeout(resolve, 300));
   return mockUsers.find(user => user.id === id);
-};
-
-const fetchTweets = async (): Promise<Tweet[]> => {
-  await new Promise(resolve => setTimeout(resolve, 800));
-  return mockTweets;
-};
-
-const fetchTweet = async (id: string): Promise<Tweet | undefined> => {
-  await new Promise(resolve => setTimeout(resolve, 300));
-  return mockTweets.find(tweet => tweet.id === id);
 };
 
 const fetchTrends = async (): Promise<Trend[]> => {
@@ -43,33 +26,10 @@ const fetchNavigationItems = async (): Promise<NavigationItem[]> => {
   return mockNavigationItems;
 };
 
-// Custom hooks
-export function useUsers() {
-  return useQuery({
-    queryKey: queryKeys.users,
-    queryFn: fetchUsers
-  });
-}
-
 export function useUser(id: string) {
   return useQuery({
     queryKey: queryKeys.user(id),
     queryFn: () => fetchUser(id),
-    enabled: !!id
-  });
-}
-
-export function useTweets() {
-  return useQuery({
-    queryKey: queryKeys.tweets,
-    queryFn: fetchTweets
-  });
-}
-
-export function useTweet(id: string) {
-  return useQuery({
-    queryKey: queryKeys.tweet(id),
-    queryFn: () => fetchTweet(id),
     enabled: !!id
   });
 }
