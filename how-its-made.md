@@ -273,4 +273,4 @@ we're getting an error
 59. The compose modal wipes the data from the default route. Also noticed that the default route for X is "home". Making this our default too. "The feed component should display when we're on the home route. The default route should be /home. Make this update"
 60. Added redirects to home as well as the router mask for the post button. 
 61. Manually added module federation for each of the remotes and configured the vibe host
-62.
+62. Asked claude to help move things to MFEs "we are starting to move to micro frontends with module federation. I need to move the content of the vibe/src/components/feed to be in apps/feed/src/components/feed."

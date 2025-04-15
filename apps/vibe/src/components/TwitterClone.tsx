@@ -1,15 +1,18 @@
 import Navigation from "./Navigation";
-import Feed from "./Feed";
 import RightSidebar from "./RightSidebar";
 import BottomNavigation from "./BottomNavigation";
 import MessagesButton from "./MessagesButton";
+import * as React from "react";
+
+const FeedR = React.lazy(() => import('feed/feed'));
 
 export default function TwitterClone() {
   return (
     <div className="flex min-h-screen bg-twitter-dark text-twitter-white">
       <Navigation />
-      {/*TODO: Remove this feed and replace it with the contents of outlet*/}
-      <Feed />
+      <React.Suspense fallback={<div className="flex-1 border-x border-twitter-gray-dark max-w-2xl">Loading Feed...</div>}>
+        <FeedR />
+      </React.Suspense>
       <RightSidebar />
       <BottomNavigation />
       <MessagesButton />

@@ -1,6 +1,7 @@
 import { rspack } from "@rspack/core";
 import {withZephyr} from "zephyr-rspack-plugin";
 import {ModuleFederationPlugin} from "@module-federation/enhanced/rspack";
+import * as path from "node:path";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -10,10 +11,24 @@ const config = {
     main: "./src/main.tsx"
   },
   resolve: {
-    extensions: ["...", ".ts", ".tsx", ".jsx"]
+    extensions: ["...", ".ts", ".tsx", ".jsx", ".css"]
   },
   module: {
     rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: "postcss-loader",
+            options: {
+              postcssOptions: {
+                config: path.resolve(__dirname, "postcss.config.js")
+              }
+            }
+          }
+        ],
+        type: "css"
+      },
       {
         test: /\.svg$/,
         type: "asset"
@@ -64,7 +79,11 @@ const config = {
       filename: 'remoteEntry.js',
       name: 'feed',
       exposes: {
-        './feed': './src/app/feed.tsx',
+        './feed': './src/components/feed.tsx',
+      },
+      shared: {
+        react: { singleton: true, requiredVersion: false, eager: true },
+        'react-dom': { singleton: true, requiredVersion: false, eager: true },
       }
     }),
   ],

@@ -79,12 +79,18 @@ const config = {
     }),
     new ModuleFederationPlugin({
       dts: false,
-      name: 'create',
+      name: 'vibe',
       remotes: {
         'grok': 'grok@http://localhost:3011/remoteEntry.js',
         'create': 'create@http://localhost:3012/remoteEntry.js',
-        'feed': 'feed@http://localhost:3012/remoteEntry.js'
+        'feed': 'feed@http://localhost:3013/remoteEntry.js'
       },
+      shared: {
+        react: { singleton: true, requiredVersion: false, eager: true },
+        'react-dom': { singleton: true, requiredVersion: false, eager: true },
+        '@tanstack/react-query': { singleton: true, requiredVersion: false },
+        '@tanstack/react-router': { singleton: true, requiredVersion: false }
+      }
     }),
   ],
   experiments: {
