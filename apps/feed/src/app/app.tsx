@@ -1,10 +1,10 @@
-import NxWelcome from "./nx-welcome";
 import '../styles.css';
+import Feed from "../components/feed";
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="@vibe/feed"/>
+      <Feed />
     </div>
   );
 }
