@@ -88,8 +88,8 @@ const config = {
       shared: {
         react: { singleton: true, requiredVersion: false, eager: true },
         'react-dom': { singleton: true, requiredVersion: false, eager: true },
-        '@tanstack/react-query': { singleton: true, requiredVersion: false },
-        '@tanstack/react-router': { singleton: true, requiredVersion: false }
+        '@tanstack/react-query': { singleton: true, requiredVersion: false, eager: true},
+        '@tanstack/react-router': { singleton: true, requiredVersion: false, eager: true }
       }
     }),
   ],

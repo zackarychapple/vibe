@@ -1,5 +1,9 @@
 packages:
   - apps/*
 onlyBuiltDependencies:
+  - '@parcel/watcher'
   - '@swc/core'
+  - esbuild
   - nx
+  - sharp
+  - workerd

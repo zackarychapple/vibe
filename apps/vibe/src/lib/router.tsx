@@ -6,6 +6,7 @@ import {
 import Root from '../routes/Root';
 import ComposeModal from '../components/ComposeModal';
 import Index from "../routes/Index";
+import * as React from "react";
 
 // Create a root route with the TwitterClone layout
 const rootRoute = createRootRoute({
@@ -70,14 +71,12 @@ const profileRoute = createRoute({
   )
 });
 
+const GrokR = React.lazy(() => import('grok/grok'));
 const grokRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/grok',
   component: () => (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Grok</h1>
-      <p>Grok AI assistant will be integrated here.</p>
-    </div>
+    <GrokR />
   )
 });
 
@@ -148,10 +147,11 @@ const moreRoute = createRoute({
 });
 
 // Compose route for the modal
+const CreateR = React.lazy(() => import('create/create'));
 const composeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/compose/post',
-  component: ComposeModal
+  component: ()=>(<CreateR />)
 });
 
 // Define the route tree

@@ -1,4 +1,4 @@
-import { rspack } from "@rspack/core";
+import {rspack} from "@rspack/core";
 import {withZephyr} from "zephyr-rspack-plugin";
 import {ModuleFederationPlugin} from "@module-federation/enhanced/rspack";
 import * as path from "node:path";
@@ -82,8 +82,10 @@ const config = {
         './feed': './src/components/feed.tsx',
       },
       shared: {
-        react: { singleton: true, requiredVersion: false, eager: true },
-        'react-dom': { singleton: true, requiredVersion: false, eager: true },
+        react: {singleton: true, requiredVersion: false, eager: true},
+        'react-dom': {singleton: true, requiredVersion: false, eager: true},
+        '@tanstack/react-query': {singleton: true, requiredVersion: false, eager: true},
+        '@tanstack/react-router': {singleton: true, requiredVersion: false, eager: true}
       }
     }),
   ],
