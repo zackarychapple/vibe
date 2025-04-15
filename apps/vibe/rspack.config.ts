@@ -1,6 +1,7 @@
 import { rspack } from "@rspack/core";
 import { withZephyr } from "zephyr-rspack-plugin";
 import * as path from "node:path";
+import {ModuleFederationPlugin} from "@module-federation/enhanced/rspack";
 
 const isDev = process.env.NODE_ENV === "development";
 
@@ -75,7 +76,16 @@ const config = {
     new rspack.ProgressPlugin({}),
     new rspack.HtmlRspackPlugin({
       template: "./src/index.html"
-    })
+    }),
+    new ModuleFederationPlugin({
+      dts: false,
+      name: 'create',
+      remotes: {
+        'grok': 'grok@http://localhost:3011/remoteEntry.js',
+        'create': 'create@http://localhost:3012/remoteEntry.js',
+        'feed': 'feed@http://localhost:3012/remoteEntry.js'
+      },
+    }),
   ],
   experiments: {
     css: true
