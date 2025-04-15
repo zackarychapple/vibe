@@ -5,12 +5,10 @@ import { User } from '../lib/utils';
 export default function Index() {
   const { data: tweets = [], isLoading: isTweetsLoading } = useTweets();
   const { data: users = [], isLoading: isUsersLoading } = useUsers();
-
   // Helper function to find user by userId
   const getUserById = (userId: string): User | undefined => {
     return users.find(user => user.id === userId);
   };
-
   return (
     <>
       {(isTweetsLoading || isUsersLoading) ? (
@@ -41,7 +39,7 @@ export default function Index() {
           {tweets.map(tweet => {
             const user = getUserById(tweet.userId);
             if (!user) return null;
-            
+
             return (
               <Tweet
                 key={tweet.id}

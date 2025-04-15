@@ -74,7 +74,6 @@ export default function Feed() {
         </div>
       </div>
 
-      {/* This is where route components will be rendered */}
       <Outlet />
     </div>
   );

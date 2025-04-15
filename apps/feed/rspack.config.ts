@@ -79,7 +79,7 @@ const config = {
       filename: 'remoteEntry.js',
       name: 'feed',
       exposes: {
-        './feed': './src/components/feed.tsx',
+        './feed': './src/app/app.tsx',
       },
       shared: {
         react: {singleton: true, requiredVersion: false, eager: true},

@@ -4,10 +4,11 @@ import {
   createRoute
 } from '@tanstack/react-router';
 import Root from '../routes/Root';
-import ComposeModal from '../components/ComposeModal';
-import Index from "../routes/Index";
 import * as React from "react";
 
+const FeedR = React.lazy(() => import('feed/feed'));
+const GrokR = React.lazy(() => import('grok/grok'));
+const CreateR = React.lazy(() => import('create/create'));
 // Create a root route with the TwitterClone layout
 const rootRoute = createRootRoute({
   component: Root,
@@ -24,7 +25,7 @@ const rootRoute = createRootRoute({
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/home',
-  component: Index
+  component: () => (<FeedR/>)
 });
 
 const exploreRoute = createRoute({
@@ -71,7 +72,6 @@ const profileRoute = createRoute({
   )
 });
 
-const GrokR = React.lazy(() => import('grok/grok'));
 const grokRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/grok',
@@ -147,7 +147,6 @@ const moreRoute = createRoute({
 });
 
 // Compose route for the modal
-const CreateR = React.lazy(() => import('create/create'));
 const composeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/compose/post',
