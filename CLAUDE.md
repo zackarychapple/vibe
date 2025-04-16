@@ -6,6 +6,36 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Package manager: pnpm (use pnpm instead of npm/yarn)
 - Monorepo management: NX
 - Module Federation for microfrontends
+- Build tool: Rspack with Zephyr plugin
+- UI styling: Tailwind CSS
+
+### Creating New Microfrontends
+To create a new microfrontend app:
+1. Generate a new app directly in the apps directory: `pnpm nx g @nx/react:app apps/[app-name] --bundler=rspack`
+2. Remove the generated `nx-welcome.tsx` file to clean up the project
+3. Rename `rspack.config.js` to `rspack.config.ts` and update it to use Module Federation
+4. Ensure all Module Federation names use underscores (`_`) instead of hyphens (`-`) in ModuleFederationPlugin configuration:
+   ```javascript
+   name: 'app_name', // Use underscores for project names, not hyphens
+   exposes: {
+     './component_name': './src/app/component-name.tsx', // Use underscores in remote path identifiers, but component files can use kebab-case
+   }
+   ```
+5. Update the host app (vibe) to import the new remote in its rspack.config.ts (using underscores in names)
+6. Set up a consistent port for development in package.json and ensure it follows the pattern:
+   ```json
+   "scripts": {
+     "serve": "rspack serve --port 301X" // e.g. 3014 for verified_orgs, following the pattern
+   }
+   ```
+7. Install necessary UI dependencies for components:
+   ```bash
+   pnpm add @radix-ui/react-slot class-variance-authority clsx lucide-react tailwind-merge
+   ```
+8. Implement dynamic imports in the router.tsx file using React.lazy() with consistent naming:
+   ```javascript
+   const ComponentR = React.lazy(() => import('app_name/component_name')); // Use underscores to match ModuleFederationPlugin config
+   ```
 
 ## Build Commands
 - Install dependencies: `pnpm install`
@@ -13,7 +43,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Build specific app: `pnpm nx build [app-name]` (e.g., `pnpm nx build feed`)
 - Start dev server:
   - Host: `pnpm nx serve vibe`
-  - Remotes: `pnpm nx serve feed`, `pnpm nx serve grok`, `pnpm nx serve create`
+  - Remotes: `pnpm nx serve feed`, `pnpm nx serve grok`, `pnpm nx serve create`, `pnpm nx serve verified-orgs`
 - Run tests: `pnpm nx test [app-name]` (e.g., `pnpm nx test vibe`)
 - Run single test: `pnpm nx test [app-name] -- -t "test name"`
 - Type check: `pnpm nx typecheck [app-name]`
@@ -33,17 +63,70 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Utilities: camelCase for utility functions and files
 - Error handling: Prefer early returns, use try/catch for async operations
 
-## Project Architecture
-- Microfrontend architecture for an X clone
+## Microfrontend Architecture
+
+### Overview
+This project implements a Twitter/X clone using a microfrontend architecture with Module Federation. The application is split into multiple independently deployable frontend applications that are composed together at runtime.
+
+### Apps Structure
 - `vibe`: Host application (app shell)
+  - Functions as the container app
+  - Provides layout, navigation, and shared UI components
+  - Consumes and integrates all remote microfrontends
+
 - Remote microfrontends:
   - `feed`: Displays feed content
   - `grok`: AI capabilities
   - `create`: Post creation functionality
 
+### Module Federation Implementation
+
+#### Host App (vibe)
+- Defined as the shell container in `apps/vibe/rspack.config.ts`
+- Declares remotes with their URLs:
+  ```javascript
+  remotes: {
+    'grok': 'grok@http://localhost:3011/remoteEntry.js',
+    'create': 'create@http://localhost:3012/remoteEntry.js',
+    'feed': 'feed@http://localhost:3013/remoteEntry.js',
+    'verified_orgs': 'verified_orgs@http://localhost:3014/remoteEntry.js'
+  }
+  ```
+- Declares shared dependencies (React, React DOM, TanStack libraries) to avoid duplication
+- Uses React.lazy for code-splitting and dynamic importing of remote components
+- Integrates imported components through TanStack Router routes
+
+#### Remote MFEs (feed, grok, create, verified_orgs)
+Each remote MFE:
+1. Exports specific components in its rspack.config.ts:
+   ```javascript
+   exposes: {
+     './component_name': './src/app/component-name.tsx', // Underscore in the exposed name, kebab-case for actual file
+   }
+   ```
+2. Has its own routing system using TanStack Router
+3. Contains its own data fetching logic (using TanStack Query)
+4. Can run independently or be integrated into the host
+
+### Routing Architecture
+- Uses TanStack Router for declarative, type-safe routing
+- Host app (`vibe`) defines the primary routes and integrates remote apps
+- Route structure:
+  - `/home` → Loads the Feed MFE
+  - `/grok` → Loads the Grok AI MFE  
+  - `/compose/post` → Loads the Create MFE
+  - `/verified-orgs` → Loads the Verified Organizations MFE
+- Remote MFEs have their own internal routing
+  - For example, the Feed MFE handles tabs like "For you" and "Following"
+
+### Data Management
+- TanStack Query for data fetching, caching, and state management
+- Each MFE manages its own data requirements
+- Shared libraries/types ensure consistency across MFEs
+
 ## Commit Guidelines
 - Uses commitlint with conventional commit format
-- Valid scopes: `vibe`, `feed`, `grok`, `create`
+- Valid scopes: `vibe`, `feed`, `grok`, `create`, `verified-orgs`, `common`
 - Format: `type(scope): message` (e.g., `feat(feed): add post component`)
 - Types: feat, fix, docs, style, refactor, test, chore, etc.
 

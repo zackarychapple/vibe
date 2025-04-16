@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+/* Twitter clone specific styles */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  html {
+    --sky-500: #0ea5e9;
+    --sky-600: #0284c7;
+    --gray-500: #71717a;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-black text-white;
+  }
+  
+  /* Override the theme variables with explicit colors */
+  :root {
+    --background: 0, 0%, 0%; /* black */
+    --foreground: 0, 0%, 100%; /* white */
+    --card: 0, 0%, 0%;
+    --card-foreground: 0, 0%, 100%;
+    --popover: 0, 0%, 0%;
+    --popover-foreground: 0, 0%, 100%;
+    --primary: 0, 0%, 100%;
+    --primary-foreground: 0, 0%, 0%;
+    --secondary: 0, 0%, 10%;
+    --secondary-foreground: 0, 0%, 100%;
+    --muted: 0, 0%, 15%;
+    --muted-foreground: 0, 0%, 65%;
+    --accent: 0, 0%, 15%;
+    --accent-foreground: 0, 0%, 100%;
+    --destructive: 0, 85%, 60%;
+    --destructive-foreground: 0, 0%, 100%;
+    --border: 215, 20%, 16%; /* #1f2937 - gray-800 */
+    --input: 215, 20%, 16%;
+    --ring: 0, 0%, 100%;
+    --radius: 0.5rem;
+  }
+}
+
+/* Custom classes to override the Tailwind colors */
+.bg-twitter-dark {
+  background-color: #000;
+}
+
+.text-twitter-white {
+  color: #fff;
+}
+
+.border-twitter-gray {
+  border-color: #2f3336;
+}
+
+.border-twitter-gray-dark {
+  border-color: #16181c;
+}
+
+.bg-twitter-blue {
+  background-color: #1d9bf0;
+}
+
+.hover\:bg-twitter-blue-dark:hover {
+  background-color: #1a8cd8;
+}
+
+.text-twitter-blue {
+  color: #1d9bf0;
+}
+
+.bg-twitter-dark-lighter {
+  background-color: #16181c;
+}
+
+.text-twitter-gray {
+  color: #71717a;
+}
+
+.hover\:bg-twitter-dark-hover:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}

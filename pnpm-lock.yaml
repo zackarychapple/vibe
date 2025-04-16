@@ -99,6 +99,9 @@ importers:
       '@swc-node/register':
         specifier: ~1.9.1
         version: 1.9.2(@swc/core@1.5.29(@swc/helpers@0.5.17))(@swc/types@0.1.21)(typescript@5.7.3)
+      '@swc/core':
+        specifier: ~1.5.7
+        version: 1.5.29(@swc/helpers@0.5.17)
       '@swc/helpers':
         specifier: ~0.5.17
         version: 0.5.17
@@ -206,6 +209,26 @@ importers:
 
   apps/grok-e2e: {}
 
+  apps/verified-orgs:
+    dependencies:
+      '@radix-ui/react-slot':
+        specifier: ^1.2.0
+        version: 1.2.0(@types/react@18.3.1)(react@18.3.1)
+      class-variance-authority:
+        specifier: ^0.7.1
+        version: 0.7.1
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      lucide-react:
+        specifier: ^0.488.0
+        version: 0.488.0(react@18.3.1)
+      tailwind-merge:
+        specifier: ^3.2.0
+        version: 3.2.0
+
+  apps/verified-orgs-e2e: {}
+
   apps/vibe:
     dependencies:
       '@tanstack/react-query':
@@ -214,6 +237,8 @@ importers:
       '@tanstack/react-router':
         specifier: ^1.116.0
         version: 1.116.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+
+  verified-orgs: {}
 
 packages:
 

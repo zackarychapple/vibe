@@ -1,9 +1,9 @@
 packages:
-  - apps/*
+  - "apps/*"
 onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - '@swc/core'
-  - esbuild
-  - nx
-  - sharp
-  - workerd
+  - "@parcel/watcher"
+  - "@swc/core"
+  - "esbuild"
+  - "nx"
+  - "sharp"
+  - "workerd"

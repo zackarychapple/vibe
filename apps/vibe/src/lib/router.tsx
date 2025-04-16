@@ -9,6 +9,7 @@ import * as React from "react";
 const FeedR = React.lazy(() => import('feed/feed'));
 const GrokR = React.lazy(() => import('grok/grok'));
 const CreateR = React.lazy(() => import('create/create'));
+const VerifiedOrgsR = React.lazy(() => import('verified_orgs/verified-orgs'));
 // Create a root route with the TwitterClone layout
 const rootRoute = createRootRoute({
   component: Root,
@@ -130,7 +131,9 @@ const verifiedOrgsRoute = createRoute({
   component: () => (
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4">Verified Organizations</h1>
-      <p>Verified organization features will be available here.</p>
+      <React.Suspense fallback={<p>Loading...</p>}>
+        <VerifiedOrgsR />
+      </React.Suspense>
     </div>
   )
 });

@@ -23,6 +23,9 @@
     },
     {
       "path": "./apps/create"
+    },
+    {
+      "path": "./apps/verified-orgs"
     }
   ]
 }
