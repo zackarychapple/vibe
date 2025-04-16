@@ -279,3 +279,103 @@ we're getting an error
 65. "I want you to extract verified organizations from the right sidebar and turn it into its own microfrontend. We will need to generate a new react app with nx to do this first (make sure your claude.md has this clarification for creating mfes). After you extract the component outside of verified organizations, this should be the top level component in the extracted component "<div className="rounded-2xl border border-[#16181c] mb-4 overflow-hidden">" I want you to inject it again using module federation and zephyr."
 66. Let claude know it made some mistakes "i made some manual changes to the naming, we cannot use "-" and should use "_", also we should remove the nx-welcome file after generating to help clean things up. Lastly we should generate the apps within the app directory directly so update your instructions for these changes. Look at the changes and see if you need to add other things to your docs."
 67. Tried a more advanced extract "ok, now I want to extract the explore section in the right sidebar, i want you to extract from the element two levels outside of the Explore h2. It is a div with a classname of p-4"
+68. Extracting some of the common ui components into an nx lib. "We will begin extracting common ui elements that we use all over to reduce duplication, can you evaluate the common components across the MFEs and find candidates to extract and let me know what are some options."
+```bash
+Based on my analysis of the codebase, here are the common UI components that are prime candidates for extraction into a shared library:
+
+UI Component Extraction Recommendations
+
+Primary Candidates for Extraction
+
+1. Basic UI Components
+   - Button: Identical implementation across vibe, feed, explore, and verified-orgs
+   - Avatar: Identical across vibe, feed, and explore
+   - Input: Used in multiple apps
+   - Separator: Identical in vibe and explore
+2. Utility Functions
+   - cn(): The class name utility function is duplicated across all apps
+   - This is a core dependency for all UI components
+
+Implementation Options
+
+Option 1: Create a shared UI library package
+
+Create a new package in the workspace structure:
+
+/packages/ui/
+/src/
+/components/
+button.tsx
+avatar.tsx
+input.tsx
+separator.tsx
+/lib/
+utils.ts
+package.json
+tsconfig.json
+
+Advantages:
+- Clean separation of concerns
+- Centralizes all UI components in one location
+- Follows standard monorepo patterns
+- Makes future additions easier
+
+Option 2: Use Module Federation for UI components
+
+Create a dedicated "ui" microfrontend that exposes the common components:
+
+/apps/ui/
+/src/
+/components/
+button.tsx
+avatar.tsx
+...
+rspack.config.ts (with Module Federation exposing components)
+
+Advantages:
+- Leverages your existing Module Federation setup
+- Allows for runtime sharing of components
+- No build-time dependencies between apps
+
+Option 3: Hybrid approach
+
+Create a shared package for the most basic primitives, and use Module Federation for higher-level composed components:
+
+- Basic primitives in a shared package: Button, Avatar, Input, etc.
+- Composite components exposed via Module Federation: Cards, Headers, etc.
+
+Additional Components to Consider
+
+Beyond the basic components found in direct duplication, there are likely other components that could be extracted based on their patterns of usage:
+
+1. Common Layout Components
+   - Cards and containers with consistent styling
+   - Modal and dialog components
+   - Toast notifications
+2. Form Components
+   - Form wrappers
+   - Form field components
+   - Validation patterns
+3. Data Display Components
+   - Loading states and skeletons
+   - Empty states
+   - Error states
+
+Implementation Recommendation
+
+I recommend Option 1: Creating a shared UI library package for the following reasons:
+
+1. The components are low-level UI primitives that should be available at build time
+2. These components are unlikely to change frequently
+3. It's a more straightforward pattern for a design system
+4. It reduces runtime overhead compared to Module Federation
+5. Makes TypeScript type checking more reliable across the codebase
+6. It allows for easier testing and documentation of UI components
+
+This approach creates a centralized "design system" for your application that ensures consistency across all microfrontends.
+
+Would you like more detailed information on any of these options or components?
+
+```
+69. Told claude "lets use nx to generate the design system components with commands like this nx g @nx/react:component libs/ui/src/my-component.tsx that we can then import back, this is option 1, but following our usage of Nx  "
+70. After it extracted the UI lib it put them into explore. Comitted and asked it to go on. 

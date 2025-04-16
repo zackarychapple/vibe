@@ -63,6 +63,26 @@ To create a new microfrontend app:
 - Utilities: camelCase for utility functions and files
 - Error handling: Prefer early returns, use try/catch for async operations
 
+## UI Component Library
+
+The project uses a shared UI component library located in `libs/ui`. This library provides common UI components used across all microfrontends to ensure consistency and reduce duplication.
+
+### Available Components
+- **Button**: A versatile button component with various styles and sizes
+- **Avatar**: User avatar component with image and fallback support
+- **Input**: Text input field with consistent styling
+- **Separator**: Horizontal or vertical separator line
+
+### Usage
+The components can be imported directly from the @vibe/ui package:
+
+```tsx
+import { Button, Avatar, AvatarImage, AvatarFallback } from '@vibe/ui';
+
+// Use components in your application
+<Button variant="ghost">Click Me</Button>
+```
+
 ## Microfrontend Architecture
 
 ### Overview

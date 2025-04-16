@@ -32,6 +32,9 @@
     },
     {
       "path": "./apps/explore"
+    },
+    {
+      "path": "./libs/ui"
     }
   ]
 }

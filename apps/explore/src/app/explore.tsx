@@ -1,7 +1,5 @@
 import { useTrends } from '../lib/query';
-import { Separator } from '../components/ui/separator';
-import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
-import { Button } from '../components/ui/button';
+import { Separator, Avatar, AvatarFallback, AvatarImage, Button } from '@vibe/ui';
 
 export default function Explore() {
   const { data: trends = [], isLoading: isTrendsLoading } = useTrends();
