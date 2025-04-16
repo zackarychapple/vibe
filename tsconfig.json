@@ -26,6 +26,12 @@
     },
     {
       "path": "./apps/verified-orgs"
+    },
+    {
+      "path": "./apps/explore-e2e"
+    },
+    {
+      "path": "./apps/explore"
     }
   ]
 }

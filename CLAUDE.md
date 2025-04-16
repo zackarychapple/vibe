@@ -78,6 +78,8 @@ This project implements a Twitter/X clone using a microfrontend architecture wit
   - `feed`: Displays feed content
   - `grok`: AI capabilities
   - `create`: Post creation functionality
+  - `verified-orgs`: Organization verification features
+  - `explore`: Trending topics and exploration features
 
 ### Module Federation Implementation
 
@@ -96,7 +98,7 @@ This project implements a Twitter/X clone using a microfrontend architecture wit
 - Uses React.lazy for code-splitting and dynamic importing of remote components
 - Integrates imported components through TanStack Router routes
 
-#### Remote MFEs (feed, grok, create, verified_orgs)
+#### Remote MFEs (feed, grok, create, verified_orgs, explore)
 Each remote MFE:
 1. Exports specific components in its rspack.config.ts:
    ```javascript
@@ -107,6 +109,20 @@ Each remote MFE:
 2. Has its own routing system using TanStack Router
 3. Contains its own data fetching logic (using TanStack Query)
 4. Can run independently or be integrated into the host
+
+#### Component Organization & Entry Points
+Each MFE maintains dual entry points:
+- **[component].tsx** (e.g., explore.tsx): 
+  - The primary exported component that other applications import
+  - This is the component exposed via Module Federation in rspack.config.ts
+  - Contains the actual UI logic and component implementation
+  - Directly imports and uses data fetching hooks (e.g., `useTrends`)
+
+- **app.tsx**: 
+  - Only used when developing/viewing the MFE in standalone mode
+  - Provides necessary wrapper context providers (QueryClientProvider)
+  - Acts as the entry point that bootstraps the application for standalone development
+  - Not exposed or used by other applications
 
 ### Routing Architecture
 - Uses TanStack Router for declarative, type-safe routing
@@ -124,9 +140,33 @@ Each remote MFE:
 - Each MFE manages its own data requirements
 - Shared libraries/types ensure consistency across MFEs
 
+#### Query Client Configuration
+- **In app.tsx (for standalone mode)**: Contains a fully configured QueryClient with performance optimizations
+  ```javascript
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
+  ```
+  - These settings are only used when the component runs standalone
+  - Provides data caching for 5 minutes
+  - Prevents unnecessary refetching when the window regains focus
+
+- **In component files (e.g., explore.tsx)**: Simply use hooks directly
+  ```javascript
+  const { data: trends = [], isLoading: isTrendsLoading } = useTrends();
+  ```
+  - When integrated into the host app, uses the QueryClient configured in the host
+  - No query configuration at the component level - follows separation of concerns
+  - All data fetching uses the host's QueryClient and its caching rules when integrated
+
 ## Commit Guidelines
 - Uses commitlint with conventional commit format
-- Valid scopes: `vibe`, `feed`, `grok`, `create`, `verified-orgs`, `common`
+- Valid scopes: `vibe`, `feed`, `grok`, `create`, `verified-orgs`, `explore`, `common`
 - Format: `type(scope): message` (e.g., `feat(feed): add post component`)
 - Types: feat, fix, docs, style, refactor, test, chore, etc.
 

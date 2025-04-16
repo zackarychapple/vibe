@@ -1,4 +1,3 @@
-import React from 'react';
 import '../styles.css';
 import { Button } from './ui/button';
 import { ChevronRight } from 'lucide-react';
