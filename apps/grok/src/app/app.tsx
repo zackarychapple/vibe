@@ -1,10 +1,10 @@
-import NxWelcome from "./nx-welcome";
 import '../styles.css';
+import Grok from "./grok";
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="@vibe/grok"/>
+      <Grok />
     </div>
   );
 }
