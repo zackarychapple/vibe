@@ -10,6 +10,7 @@ const FeedR = React.lazy(() => import('feed/feed'));
 const GrokR = React.lazy(() => import('grok/grok'));
 const CreateR = React.lazy(() => import('create/create'));
 const VerifiedOrgsR = React.lazy(() => import('verified_orgs/verified-orgs'));
+const ExploreR = React.lazy(() => import('explore/explore'));
 // Create a root route with the TwitterClone layout
 const rootRoute = createRootRoute({
   component: Root,
@@ -33,10 +34,9 @@ const exploreRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/explore',
   component: () => (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Explore</h1>
-      <p>Explore content will be displayed here.</p>
-    </div>
+    <React.Suspense fallback={<p>Loading...</p>}>
+      <ExploreR />
+    </React.Suspense>
   )
 });
 
