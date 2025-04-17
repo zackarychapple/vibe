@@ -1,8 +1,10 @@
 import { useTrends } from '../lib/query';
 import { Separator, Avatar, AvatarFallback, AvatarImage, Button } from '@vibe/ui';
+import { useNavigate } from '@tanstack/react-router';
 
 export default function Explore() {
   const { data: trends = [], isLoading: isTrendsLoading } = useTrends();
+  const navigate = useNavigate();
 
   return (
     <div className="rounded-2xl border border-[#16181c] overflow-hidden">
@@ -52,7 +54,7 @@ export default function Explore() {
         <Button 
           variant="ghost" 
           className="w-full text-twitter-blue mt-4 hover:bg-[#16181c]"
-          onClick={() => window.location.href = '/explore'}
+          onClick={() => navigate({ to: '/explore' })}
         >
           Show more
         </Button>
