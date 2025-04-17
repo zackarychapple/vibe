@@ -18,7 +18,7 @@ export interface Trend {
 export const mockTrends: Trend[] = [
   {
     id: "trend-1",
-    title: "OpenAI Launches GPT-4.1 Models",
+    title: "OpenAI Launches GPT-5.1",
     category: "Technology",
     postCount: 5300,
     time: "3 hours ago"
