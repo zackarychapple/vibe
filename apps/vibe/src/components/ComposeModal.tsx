@@ -1,5 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
+import { Avatar, AvatarFallback, AvatarImage, Button } from "@vibe/ui";
 import { X, ImageIcon, ListMusic, BarChart2, MapPin, Star } from "lucide-react";
 import { useUser } from "../lib/query";
 import { useNavigate } from "@tanstack/react-router";
@@ -21,8 +20,9 @@ export default function ComposeModal() {
         <div className="flex items-center p-4 border-b border-twitter-gray-dark">
           <Button 
             variant="ghost" 
+            rounded="full"
             size="icon" 
-            className="rounded-full h-9 w-9 mr-2" 
+            className="h-9 w-9 mr-2" 
             onClick={handleClose}
           >
             <X className="h-5 w-5" />
@@ -49,24 +49,26 @@ export default function ComposeModal() {
               />
               <div className="flex items-center mt-4 border-t border-twitter-gray-dark pt-4">
                 <div className="flex gap-2 text-twitter-blue">
-                  <Button variant="ghost" size="icon" className="rounded-full h-9 w-9">
+                  <Button variant="ghost" rounded="full" size="icon" className="h-9 w-9">
                     <ImageIcon className="h-5 w-5" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="rounded-full h-9 w-9">
+                  <Button variant="ghost" rounded="full" size="icon" className="h-9 w-9">
                     <ListMusic className="h-5 w-5" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="rounded-full h-9 w-9">
+                  <Button variant="ghost" rounded="full" size="icon" className="h-9 w-9">
                     <BarChart2 className="h-5 w-5" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="rounded-full h-9 w-9">
+                  <Button variant="ghost" rounded="full" size="icon" className="h-9 w-9">
                     <MapPin className="h-5 w-5" />
                   </Button>
-                  <Button variant="ghost" size="icon" className="rounded-full h-9 w-9">
+                  <Button variant="ghost" rounded="full" size="icon" className="h-9 w-9">
                     <Star className="h-5 w-5" />
                   </Button>
                 </div>
                 <Button 
-                  className="ml-auto rounded-full bg-twitter-blue hover:bg-twitter-blue-dark px-4"
+                  variant="twitter"
+                  rounded="full"
+                  className="ml-auto px-4"
                   disabled={!content.trim()}
                 >
                   Post

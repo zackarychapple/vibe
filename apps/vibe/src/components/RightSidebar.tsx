@@ -1,4 +1,4 @@
-import { Input } from "./ui/input";
+import { Input } from "@vibe/ui";
 import { Search } from "lucide-react";
 import * as React from "react";
 

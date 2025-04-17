@@ -1,0 +1,53 @@
+/* Twitter theme CSS variables and utility classes */
+
+:root {
+  /* Base colors */
+  --twitter-blue: #1d9bf0;
+  --twitter-blue-dark: #1a8cd8;
+  --twitter-dark: #000;
+  --twitter-dark-lighter: #16181c;
+  --twitter-gray: #71717a;
+  --twitter-gray-dark: #16181c;
+  --twitter-white: #fff;
+}
+
+/* Twitter-specific utility classes */
+.bg-twitter-dark {
+  background-color: var(--twitter-dark);
+}
+
+.text-twitter-white {
+  color: var(--twitter-white);
+}
+
+.border-twitter-gray {
+  border-color: #2f3336;
+}
+
+.border-twitter-gray-dark {
+  border-color: var(--twitter-gray-dark);
+}
+
+.bg-twitter-blue {
+  background-color: var(--twitter-blue);
+}
+
+.hover\:bg-twitter-blue-dark:hover {
+  background-color: var(--twitter-blue-dark);
+}
+
+.text-twitter-blue {
+  color: var(--twitter-blue);
+}
+
+.bg-twitter-dark-lighter {
+  background-color: var(--twitter-dark-lighter);
+}
+
+.text-twitter-gray {
+  color: var(--twitter-gray);
+}
+
+.hover\:bg-twitter-dark-hover:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}

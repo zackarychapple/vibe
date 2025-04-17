@@ -85,7 +85,8 @@ const config = {
         react: {singleton: true, requiredVersion: false, eager: true},
         'react-dom': {singleton: true, requiredVersion: false, eager: true},
         '@tanstack/react-query': {singleton: true, requiredVersion: false, eager: true},
-        '@tanstack/react-router': {singleton: true, requiredVersion: false, eager: true}
+        '@tanstack/react-router': {singleton: true, requiredVersion: false, eager: true},
+        '@vibe/ui': {singleton: true, requiredVersion: false, eager: true}
       }
     }),
   ],

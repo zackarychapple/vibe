@@ -1,10 +1,10 @@
-import NxWelcome from "./nx-welcome";
 import '../styles.css';
+import Create from "./create";
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="@vibe/create"/>
+      <Create />
     </div>
   );
 }

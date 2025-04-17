@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
+import { Avatar, AvatarFallback, AvatarImage, Button } from "@vibe/ui";
 import { ArrowUpFromLine, BarChart2, Bookmark, MessageCircle, MoreHorizontal, Share, Star } from "lucide-react";
 import { User } from "../lib/utils";
 
@@ -60,7 +59,7 @@ export default function Tweet({
             <span className="text-twitter-gray ml-2">
               @{username} · {time}
             </span>
-            <Button variant="ghost" size="icon" className="ml-auto rounded-full h-8 w-8">
+            <Button variant="ghost" rounded="full" size="icon" className="ml-auto h-8 w-8">
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </div>
@@ -94,26 +93,26 @@ export default function Tweet({
           )}
           
           <div className="flex items-center justify-between mt-3 text-twitter-gray">
-            <Button variant="ghost" size="sm" className="rounded-full gap-2">
+            <Button variant="ghost" rounded="full" size="sm" className="gap-2">
               <MessageCircle className="h-4 w-4" />
               {stats.replies > 0 && <span>{stats.replies}</span>}
             </Button>
-            <Button variant="ghost" size="sm" className="rounded-full gap-2">
+            <Button variant="ghost" rounded="full" size="sm" className="gap-2">
               <ArrowUpFromLine className="h-4 w-4" />
               {stats.retweets > 0 && <span>{stats.retweets}</span>}
             </Button>
-            <Button variant="ghost" size="sm" className="rounded-full gap-2">
+            <Button variant="ghost" rounded="full" size="sm" className="gap-2">
               <Star className="h-4 w-4" />
               {stats.likes > 0 && <span>{stats.likes}</span>}
             </Button>
-            <Button variant="ghost" size="sm" className="rounded-full gap-2">
+            <Button variant="ghost" rounded="full" size="sm" className="gap-2">
               <BarChart2 className="h-4 w-4" />
               {stats.views > 0 && <span>{stats.views}</span>}
             </Button>
-            <Button variant="ghost" size="sm" className="rounded-full gap-2">
+            <Button variant="ghost" rounded="full" size="sm" className="gap-2">
               <Bookmark className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="sm" className="rounded-full gap-2">
+            <Button variant="ghost" rounded="full" size="sm" className="gap-2">
               <Share className="h-4 w-4" />
             </Button>
           </div>

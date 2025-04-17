@@ -178,7 +178,11 @@ importers:
         specifier: ^3.0.0
         version: 3.1.1(@types/node@20.17.30)(@vitest/ui@3.1.1)(jiti@2.4.2)(jsdom@22.1.0)(less@4.3.0)(sass-embedded@1.86.3)(sass@1.86.3)(terser@5.39.0)(yaml@2.7.1)
 
-  apps/create: {}
+  apps/create:
+    dependencies:
+      '@vibe/ui':
+        specifier: workspace:*
+        version: link:../../libs/ui
 
   apps/create-e2e: {}
 
@@ -208,6 +212,9 @@ importers:
       '@tanstack/react-router':
         specifier: ^1.116.0
         version: 1.116.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@vibe/ui':
+        specifier: workspace:*
+        version: link:../../libs/ui
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.1
@@ -223,7 +230,11 @@ importers:
 
   apps/feed-e2e: {}
 
-  apps/grok: {}
+  apps/grok:
+    dependencies:
+      '@vibe/ui':
+        specifier: workspace:*
+        version: link:../../libs/ui
 
   apps/grok-e2e: {}
 
@@ -232,6 +243,9 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.2.0
         version: 1.2.0(@types/react@18.3.1)(react@18.3.1)
+      '@vibe/ui':
+        specifier: workspace:*
+        version: link:../../libs/ui
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -255,6 +269,9 @@ importers:
       '@tanstack/react-router':
         specifier: ^1.116.0
         version: 1.116.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@vibe/ui':
+        specifier: workspace:*
+        version: link:../../libs/ui
 
   libs/ui:
     dependencies:

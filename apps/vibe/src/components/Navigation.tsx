@@ -1,5 +1,4 @@
-import {Avatar, AvatarFallback, AvatarImage} from "./ui/avatar";
-import {Button} from "./ui/button";
+import {Avatar, AvatarFallback, AvatarImage, Button} from "@vibe/ui";
 import {
   Bookmark,
   Home,
@@ -22,7 +21,6 @@ const iconMap: Record<string, React.ElementType> = {
   "Search": Search,
   "MessageCircle": MessageCircle,
   "ListMusic": ListMusic,
-  "X": X,
   "Bookmark": Bookmark,
   "Users": Users,
   "PenSquare": PenSquare,
@@ -42,10 +40,6 @@ export default function Navigation() {
 
   return (
     <div className="hidden md:flex flex-col w-64 p-4 border-r border-twitter-gray-dark">
-      <div className="flex items-center justify-between mb-6">
-        <X className="h-8 w-8"/>
-      </div>
-
       <nav className="space-y-4">
         {isNavLoading ? (
           // Loading state for navigation items
@@ -59,7 +53,8 @@ export default function Navigation() {
               <Button
                 key={item.id}
                 variant="ghost"
-                className="w-full justify-start text-lg font-semibold hover:bg-twitter-dark-hover rounded-full"
+                rounded="full"
+                className="w-full justify-start text-lg font-semibold"
                 asChild
               >
                 <Link to={item.path} activeProps={{className: "bg-twitter-dark-hover"}}>

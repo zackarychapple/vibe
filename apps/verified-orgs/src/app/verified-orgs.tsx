@@ -1,5 +1,5 @@
 import '../styles.css';
-import { Button } from './ui/button';
+import { Button } from '@vibe/ui';
 import { ChevronRight } from 'lucide-react';
 
 export function VerifiedOrganizations() {
@@ -14,23 +14,23 @@ export function VerifiedOrganizations() {
         </div>
 
         <div className="space-y-3">
-          <Button variant="ghost" className="w-full justify-between text-[#e7e9ea] hover:bg-[#16181c] rounded-full">
+          <Button variant="ghost" rounded="full" className="w-full justify-between text-[#e7e9ea]">
             Manage your ads credits
             <ChevronRight className="h-4 w-4" />
           </Button>
-          <Button variant="ghost" className="w-full justify-between text-[#e7e9ea] hover:bg-[#16181c] rounded-full">
+          <Button variant="ghost" rounded="full" className="w-full justify-between text-[#e7e9ea]">
             Set up an ad campaign
             <ChevronRight className="h-4 w-4" />
           </Button>
-          <Button variant="ghost" className="w-full justify-between text-[#e7e9ea] hover:bg-[#16181c] rounded-full">
+          <Button variant="ghost" rounded="full" className="w-full justify-between text-[#e7e9ea]">
             Manage your jobs
             <ChevronRight className="h-4 w-4" />
           </Button>
-          <Button variant="ghost" className="w-full justify-between text-[#e7e9ea] hover:bg-[#16181c] rounded-full">
+          <Button variant="ghost" rounded="full" className="w-full justify-between text-[#e7e9ea]">
             Get support with an issue
             <ChevronRight className="h-4 w-4" />
           </Button>
-          <Button variant="ghost" className="w-full justify-between text-twitter-blue hover:bg-[#16181c] rounded-full">
+          <Button variant="ghost" rounded="full" className="w-full justify-between text-twitter-blue">
             View all features
             <ChevronRight className="h-4 w-4" />
           </Button>
