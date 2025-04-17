@@ -49,7 +49,11 @@ export default function Explore() {
           </div>
         )}
 
-        <Button variant="ghost" className="w-full text-twitter-blue mt-4 hover:bg-[#16181c]">
+        <Button 
+          variant="ghost" 
+          className="w-full text-twitter-blue mt-4 hover:bg-[#16181c]"
+          onClick={() => window.location.href = '/explore'}
+        >
           Show more
         </Button>
       </div>
